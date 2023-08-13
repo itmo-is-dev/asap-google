@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore"/>
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection"/>
+        <PackageReference Include="Grpc.Tools"/>
+        <PackageReference Include="MediatR"/>
+        <PackageReference Include="Riok.Mapperly"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="protos/*.proto" GrpcServices="Server"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Application\ITMO.Dev.ASAP.Google.Application.Contracts\ITMO.Dev.ASAP.Google.Application.Contracts.csproj"/>
+    </ItemGroup>
+
+</Project>

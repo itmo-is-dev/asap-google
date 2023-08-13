@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package itmo.dev.asap.kafka;
+option csharp_namespace = "Itmo.Dev.Asap.Kafka";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message QueueUpdatedKey {
+  string subject_course_id = 1;
+}
+
+message QueueUpdatedValue {
+  string subject_course_id = 1;
+  string group_id = 2;
+  SubmissionQueue submissions_queue = 3;
+
+  message SubmissionQueue {
+    string group_name = 1;
+    repeated QueueSubmission submissions = 2;
+  }
+
+  message QueueSubmission {
+    Student student = 1;
+    Submission submission = 2;
+  }
+
+  message Student {
+    User user = 1;
+    string group_name = 2;
+    google.protobuf.Int32Value university_id = 3;
+    google.protobuf.StringValue github_username = 4;
+  }
+
+  message User {
+    string id = 1;
+    string first_name = 2;
+    string middle_name = 3;
+    string last_name = 4;
+  }
+
+  message Submission {
+    string id = 1;
+    google.protobuf.Timestamp submission_date = 2;
+    string payload = 3;
+    string assignment_short_name = 4;
+    SubmissionState state = 5;
+  }
+
+  enum SubmissionState {
+    SUBMISSION_STATE_NONE = 0;
+    SUBMISSION_STATE_ACTIVE = 1;
+    SUBMISSION_STATE_INACTIVE = 2;
+    SUBMISSION_STATE_DELETED = 3;
+    SUBMISSION_STATE_COMPLETED = 4;
+    SUBMISSION_STATE_REVIEWED = 5;
+    SUBMISSION_STATE_BANNED = 6;
+  }
+}

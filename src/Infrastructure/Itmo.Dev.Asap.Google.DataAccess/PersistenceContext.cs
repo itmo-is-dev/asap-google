@@ -1,0 +1,29 @@
+using Itmo.Dev.Asap.Google.Application.DataAccess;
+using Itmo.Dev.Asap.Google.Application.DataAccess.Repositories;
+using Itmo.Dev.Platform.Postgres.UnitOfWork;
+using System.Data;
+
+namespace Itmo.Dev.Asap.Google.DataAccess;
+
+public class PersistenceContext : IPersistenceContext
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public PersistenceContext(IUnitOfWork unitOfWork, ISubjectCourseRepository subjectCourses)
+    {
+        _unitOfWork = unitOfWork;
+        SubjectCourses = subjectCourses;
+    }
+
+    public ISubjectCourseRepository SubjectCourses { get; }
+
+    public ValueTask CommitAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+    {
+        return _unitOfWork.CommitAsync(isolationLevel, cancellationToken);
+    }
+
+    public ValueTask CommitAsync(CancellationToken cancellationToken)
+    {
+        return _unitOfWork.CommitAsync(IsolationLevel.ReadCommitted, cancellationToken);
+    }
+}

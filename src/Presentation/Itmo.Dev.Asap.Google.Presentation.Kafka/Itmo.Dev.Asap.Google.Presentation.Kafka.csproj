@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Itmo.Dev.Platform.Kafka" />
+        <PackageReference Include="Grpc.Tools" />
+        <PackageReference Include="MediatR" />
+        <PackageReference Include="Riok.Mapperly" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf ProtoRoot="protos" Include="protos\**\*.proto" GrpcServices="None" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Contracts\Itmo.Dev.Asap.Google.Application.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+syntax = "proto3";
+option csharp_namespace = "Itmo.Dev.Asap.Google";
+
+service GoogleSubjectCourseService {
+  rpc FindByIds(FindByIdsRequest) returns (FindByIdsResponse);
+}
+
+message FindByIdsRequest {
+  repeated string ids = 1;
+}
+
+message FindByIdsResponse {
+  repeated GoogleSubjectCourse subject_courses = 1;
+}
+
+message GoogleSubjectCourse {
+  string id = 1;
+  string spreadsheet_id = 2;
+}

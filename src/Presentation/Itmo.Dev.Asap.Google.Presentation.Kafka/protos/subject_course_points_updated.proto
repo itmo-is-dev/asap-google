@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package itmo.dev.asap.kafka;
+option csharp_namespace = "Itmo.Dev.Asap.Kafka";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message SubjectCoursePointsUpdatedKey {
+  string subject_course_id = 1;
+}
+
+message SubjectCoursePointsUpdatedValue {
+  string subject_course_id = 1;
+  SubjectCoursePoints points = 2;
+  
+  message SubjectCoursePoints {
+    repeated Assignment assignments = 1;
+    repeated StudentPoints student_points = 2;
+  }
+  
+  message Assignment {
+    string id = 1;
+    string short_name = 2;
+  }
+  
+  message User {
+    string id = 1;
+    string first_name = 2;
+    string middle_name = 3;
+    string last_name = 4;
+  }
+  
+  message Student {
+    User user = 1;
+    string group_name = 2;
+    google.protobuf.Int32Value university_id = 3;
+    google.protobuf.StringValue github_username = 4;
+  }
+  
+  message AssignmentPoints {
+    string assignment_id = 1;
+    google.protobuf.Timestamp date = 2;
+    bool is_banned = 3;
+    double points = 4;
+  }
+  
+  message StudentPoints {
+    Student student = 1;
+    repeated AssignmentPoints points = 2;
+  }
+}

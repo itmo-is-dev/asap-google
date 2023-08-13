@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package itmo.dev.asap.kafka;
+option csharp_namespace = "Itmo.Dev.Asap.Kafka";
+
+message SubjectCourseCreatedKey {
+  string subject_course_id = 1;
+}
+
+message SubjectCourseCreatedValue {
+  message SubjectCourse {
+    string id = 1;
+    string title = 2;
+  }
+
+  SubjectCourse subject_course = 1;
+}
