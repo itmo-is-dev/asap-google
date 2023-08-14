@@ -12,6 +12,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.Github\Itmo.Dev.Asap.Google.Application.Github.csproj" />
       <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Contracts\Itmo.Dev.Asap.Google.Application.Contracts.csproj" />
     </ItemGroup>
 

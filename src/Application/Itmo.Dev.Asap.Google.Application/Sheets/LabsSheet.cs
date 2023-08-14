@@ -44,7 +44,11 @@ public class LabsSheet : ISheet<SubjectCoursePointsDto>
 
         if (pointsSheetExists is false)
         {
-            var courseStudents = new CourseStudentsDto(model.StudentPoints);
+            CourseStudentsDto.StudentDto[] students = model.Students.Values
+                .Select(x => new CourseStudentsDto.StudentDto(x.GroupName))
+                .ToArray();
+
+            var courseStudents = new CourseStudentsDto(students);
             await _pointsSheet.UpdateAsync(spreadsheetId, courseStudents, token);
         }
     }

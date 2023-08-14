@@ -1,7 +1,6 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Providers;
-using Itmo.Dev.Asap.Google.Application.Dto.Students;
 using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Formatters;
@@ -50,7 +49,7 @@ public class LabsTable : RowTable<SubjectCoursePointsDto>
             Label("GitHub").WithColumnWidth(1.2).Frozen(),
             ForEach(model.Assignments, a => VStack
             (
-                Label(a.ShortName).WithSideMediumBorder(),
+                Label(a.Value.ShortName).WithSideMediumBorder(),
                 HStack
                 (
                     Label("Балл").WithLeadingMediumBorder(),
@@ -63,24 +62,27 @@ public class LabsTable : RowTable<SubjectCoursePointsDto>
 
         CultureInfo currentCulture = _cultureInfoProvider.GetCultureInfo();
 
-        IReadOnlyList<StudentPointsDto> studentPoints = model.StudentPoints;
+        IReadOnlyList<SubjectCoursePointsDto.StudentPointsDto> studentPointsList = model.StudentPoints;
 
-        for (int i = 0; i < studentPoints.Count; i++)
+        for (int i = 0; i < studentPointsList.Count; i++)
         {
-            (StudentDto student, IReadOnlyCollection<AssignmentPointsDto> assignmentPoints) = studentPoints[i];
+            SubjectCoursePointsDto.StudentPointsDto studentPoints = studentPointsList[i];
+            SubjectCoursePointsDto.StudentDto student = model.Students[studentPoints.StudentId];
 
-            double totalPoints = assignmentPoints.Sum(p => p.Points);
+            double totalPoints = studentPoints.Points.Sum(p => p.Points);
             double roundedPoints = Math.Round(totalPoints, 2);
 
             IRowComponent row = Row
             (
-                Label(student.UniversityId),
+                Label(student.User.UniversityId),
                 Label(_userFullNameFormatter.GetFullName(student.User)),
                 Label(student.GroupName),
-                Label(student.GitHubUsername ?? string.Empty),
-                ForEach(model.Assignments, a => BuildAssignmentPointsCell(a, assignmentPoints, currentCulture)),
+                Label(student.GithubUsername ?? string.Empty),
+                ForEach(
+                    model.Assignments,
+                    a => BuildAssignmentPointsCell(a.Value, studentPoints.Points, currentCulture)),
                 Label(roundedPoints, currentCulture).WithTrailingMediumBorder()
-            ).WithDefaultStyle(i, studentPoints.Count).WithGroupSeparators(i, studentPoints);
+            ).WithDefaultStyle(i, studentPointsList.Count).WithGroupSeparators(i, model);
 
             yield return row;
         }
@@ -88,10 +90,10 @@ public class LabsTable : RowTable<SubjectCoursePointsDto>
 
     private static IComponent BuildAssignmentPointsCell(
         AssignmentDto assignment,
-        IEnumerable<AssignmentPointsDto> points,
+        IEnumerable<SubjectCoursePointsDto.StudentPointsDto.AssignmentPointsDto> points,
         IFormatProvider formatProvider)
     {
-        AssignmentPointsDto? assignmentPoints = points.FirstOrDefault(p => p.AssignmentId == assignment.Id);
+        SubjectCoursePointsDto.StudentPointsDto.AssignmentPointsDto? assignmentPoints = points.FirstOrDefault(p => p.AssignmentId == assignment.Id);
 
         if (assignmentPoints is null)
             return EmptyAssignmentPointsCell;
