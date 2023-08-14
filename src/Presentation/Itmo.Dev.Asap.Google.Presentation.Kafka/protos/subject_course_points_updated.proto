@@ -16,7 +16,8 @@ message SubjectCoursePointsUpdatedValue {
   
   message SubjectCoursePoints {
     repeated Assignment assignments = 1;
-    repeated StudentPoints student_points = 2;
+    repeated Student students = 2;
+    repeated StudentPoints points = 3;
   }
   
   message Assignment {
@@ -29,13 +30,12 @@ message SubjectCoursePointsUpdatedValue {
     string first_name = 2;
     string middle_name = 3;
     string last_name = 4;
+    google.protobuf.Int32Value university_id = 5;
   }
   
   message Student {
     User user = 1;
     string group_name = 2;
-    google.protobuf.Int32Value university_id = 3;
-    google.protobuf.StringValue github_username = 4;
   }
   
   message AssignmentPoints {
@@ -46,7 +46,7 @@ message SubjectCoursePointsUpdatedValue {
   }
   
   message StudentPoints {
-    Student student = 1;
+    string student_id = 1;
     repeated AssignmentPoints points = 2;
   }
 }

@@ -1,0 +1,26 @@
+syntax = "proto3";
+option csharp_namespace = "Itmo.Dev.Asap.Github.Users";
+
+import "models/github_user.proto";
+
+service GithubUserService {
+  rpc UpdateUsername(UpdateUsernameRequest) returns (UpdateUsernameResponse);
+  rpc FindByIds(FindByIdsRequest) returns (FindByIdsResponse);
+}
+
+message UpdateUsernameRequest {
+  string user_id = 1;
+  string github_username = 2;
+}
+
+message UpdateUsernameResponse {
+  GithubUser user = 1;
+}
+
+message FindByIdsRequest {
+  repeated string user_ids = 1;
+}
+
+message FindByIdsResponse {
+  repeated GithubUser users = 1;
+}

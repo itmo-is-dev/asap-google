@@ -2,7 +2,6 @@ using FluentSpreadsheets;
 using FluentSpreadsheets.GoogleSheets.Extensions;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Models;
-using Itmo.Dev.Asap.Google.Application.Dto.Students;
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Sheets;
 using static FluentSpreadsheets.ComponentFactory;
@@ -37,13 +36,13 @@ public class PointsTable : RowTable<CourseStudentsDto>
     {
         yield return Header;
 
-        IReadOnlyList<StudentPointsDto> studentPoints = model.StudentsPoints;
+        IReadOnlyList<CourseStudentsDto.StudentDto> studentPoints = model.Students;
 
         for (int i = 0; i < studentPoints.Count; i++)
         {
             IRowComponent row = GetRowReference()
                 .WithDefaultStyle(i, studentPoints.Count)
-                .WithGroupSeparators(i, studentPoints);
+                .WithGroupSeparators(i, model);
 
             yield return row;
         }

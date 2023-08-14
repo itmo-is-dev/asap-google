@@ -1,0 +1,7 @@
+syntax = "proto3";
+option csharp_namespace = "Itmo.Dev.Asap.Github.Models";
+
+message GithubUser {
+  string user_id = 1;
+  string username = 2;
+}

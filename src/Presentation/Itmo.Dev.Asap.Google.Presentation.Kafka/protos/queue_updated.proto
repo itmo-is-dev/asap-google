@@ -28,8 +28,6 @@ message QueueUpdatedValue {
   message Student {
     User user = 1;
     string group_name = 2;
-    google.protobuf.Int32Value university_id = 3;
-    google.protobuf.StringValue github_username = 4;
   }
 
   message User {
@@ -37,6 +35,7 @@ message QueueUpdatedValue {
     string first_name = 2;
     string middle_name = 3;
     string last_name = 4;
+    google.protobuf.Int32Value university_id = 5;
   }
 
   message Submission {
