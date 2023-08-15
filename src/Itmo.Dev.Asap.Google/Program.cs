@@ -1,6 +1,7 @@
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Handlers.Extensions;
 using Itmo.Dev.Asap.Google.DataAccess.Extensions;
+using Itmo.Dev.Asap.Google.Integrations.Github.Extensions;
 using Itmo.Dev.Asap.Google.Presentation.Grpc.Extensions;
 using Itmo.Dev.Asap.Google.Presentation.Kafka.Extensions;
 using Itmo.Dev.Asap.Google.Spreadsheets.Extensions;
@@ -12,6 +13,7 @@ builder.Services
     .AddGoogleApplication()
     .AddGoogleApplicationHandlers()
     .AddGoogleInfrastructureIntegration()
+    .AddGithubIntegration()
     .AddDataAccess()
     .AddGrpcPresentation()
     .AddKafkaPresentation(builder.Configuration);
