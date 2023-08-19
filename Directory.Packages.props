@@ -10,8 +10,10 @@
     <PackageVersion Include="Grpc.Core.Api" Version="2.55.0" />
     <PackageVersion Include="Grpc.Net.Client" Version="2.55.0" />
     <PackageVersion Include="Grpc.Tools" Version="2.56.2" />
-    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="1.0.38" />
-    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.0.38" />
+    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="1.0.42" />
+    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.0.42" />
+    <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.42" />
+    <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.42" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
     <PackageVersion Include="Riok.Mapperly" Version="2.8.0" />
   </ItemGroup>
@@ -27,8 +29,6 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="7.0.1" />
     <PackageVersion Include="Npgsql" Version="7.0.4" />
     <PackageVersion Include="Respawn" Version="6.0.0" />
-    <PackageVersion Include="Sentry.AspNetCore" Version="3.33.0" />
-    <PackageVersion Include="Sentry.Serilog" Version="3.33.0" />
     <PackageVersion Include="SourceKit.Generators.Builder" Version="1.0.4" />
     <PackageVersion Include="Testcontainers.PostgreSql" Version="3.1.0" />
   </ItemGroup>
@@ -125,11 +125,9 @@
     <PackageVersion Include="ronimizy.FluentSerialization.Extensions.NewtonsoftJson" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Serilog" Version="2.11.0" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="6.0.1" />
     <PackageVersion Include="Serilog.Extensions.Hosting" Version="5.0.1" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="3.1.0" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="4.0.1" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageVersion Include="Serilog.Sinks.XUnit" Version="3.0.3" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
