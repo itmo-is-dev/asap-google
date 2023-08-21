@@ -17,12 +17,8 @@ message QueueUpdatedValue {
 
   message SubmissionQueue {
     string group_name = 1;
-    repeated QueueSubmission submissions = 2;
-  }
-
-  message QueueSubmission {
-    Student student = 1;
-    Submission submission = 2;
+    map<string, Student> students = 2;
+    repeated Submission submissions = 3;
   }
 
   message Student {
@@ -40,10 +36,11 @@ message QueueUpdatedValue {
 
   message Submission {
     string id = 1;
-    google.protobuf.Timestamp submission_date = 2;
-    string payload = 3;
-    string assignment_short_name = 4;
-    SubmissionState state = 5;
+    string student_id = 2;
+    google.protobuf.Timestamp submission_date = 3;
+    string payload = 4;
+    string assignment_short_name = 5;
+    SubmissionState state = 6;
   }
 
   enum SubmissionState {

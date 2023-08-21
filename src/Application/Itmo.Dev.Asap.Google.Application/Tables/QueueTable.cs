@@ -43,11 +43,12 @@ public class QueueTable : RowTable<SubmissionsQueueDto>
     {
         yield return Header;
 
-        IReadOnlyList<QueueSubmissionDto> submissions = model.Submissions;
+        IReadOnlyList<SubmissionDto> submissions = model.Submissions;
 
         for (int i = 0; i < submissions.Count; i++)
         {
-            (StudentDto student, SubmissionDto submission) = submissions[i];
+            SubmissionDto submission = submissions[i];
+            StudentDto student = model.Students[submission.StudentId];
 
             IRowComponent row = Row
             (
