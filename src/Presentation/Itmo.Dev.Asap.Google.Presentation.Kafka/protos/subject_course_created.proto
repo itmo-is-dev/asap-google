@@ -3,6 +3,8 @@ syntax = "proto3";
 package itmo.dev.asap.kafka;
 option csharp_namespace = "Itmo.Dev.Asap.Kafka";
 
+import "google/protobuf/wrappers.proto";
+
 message SubjectCourseCreatedKey {
   string subject_course_id = 1;
 }
@@ -10,8 +12,10 @@ message SubjectCourseCreatedKey {
 message SubjectCourseCreatedValue {
   message SubjectCourse {
     string id = 1;
-    string title = 2;
+    string subject_id = 2;
+    string title = 3;
   }
 
   SubjectCourse subject_course = 1;
+  google.protobuf.StringValue correlation_id = 2;
 }

@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application.Enrichment\Itmo.Dev.Asap.Google.Application.Enrichment.csproj" />
         <ProjectReference Include="..\Application\ITMO.Dev.ASAP.Google.Application.Handlers\ITMO.Dev.ASAP.Google.Application.Handlers.csproj" />
         <ProjectReference Include="..\Application\ITMO.Dev.ASAP.Google.Application\ITMO.Dev.ASAP.Google.Application.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.DataAccess\Itmo.Dev.Asap.Google.DataAccess.csproj" />

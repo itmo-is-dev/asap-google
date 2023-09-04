@@ -11,4 +11,5 @@
       <ProjectReference Include="..\Abstractions\Itmo.Dev.Asap.Google.Application.Spreadsheets\Itmo.Dev.Asap.Google.Application.Spreadsheets.csproj" />
     </ItemGroup>
 
+
 </Project>

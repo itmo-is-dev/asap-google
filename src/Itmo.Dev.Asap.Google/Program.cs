@@ -1,5 +1,6 @@
 #pragma warning disable CA1506
 
+using Itmo.Dev.Asap.Google.Application.Enrichment.Extensions;
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Handlers.Extensions;
 using Itmo.Dev.Asap.Google.DataAccess.Extensions;
@@ -18,6 +19,7 @@ await builder.AddYandexCloudConfigurationAsync();
 builder.Services
     .AddGoogleApplication()
     .AddGoogleApplicationHandlers()
+    .AddEnrichment()
     .AddGoogleInfrastructureIntegration()
     .AddGithubIntegration()
     .AddDataAccess()
