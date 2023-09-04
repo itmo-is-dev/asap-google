@@ -1,3 +1,4 @@
+using Google;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Sheets.v4;
@@ -8,6 +9,7 @@ using Itmo.Dev.Asap.Google.Common;
 using Itmo.Dev.Asap.Google.Spreadsheets.Extensions;
 using Itmo.Dev.Asap.Google.Spreadsheets.Tools;
 using Microsoft.Extensions.Logging;
+using System.Net;
 using File = Google.Apis.Drive.v3.Data.File;
 
 namespace Itmo.Dev.Asap.Google.Spreadsheets.Services;
@@ -45,7 +47,9 @@ public class SpreadsheetService : ISpreadsheetService
     {
         var spreadsheetToCreate = new File
         {
-            Parents = _tablesParentsProvider.GetParents(), MimeType = SpreadsheetType, Name = title,
+            Parents = _tablesParentsProvider.GetParents(),
+            MimeType = SpreadsheetType,
+            Name = title,
         };
 
         _logger.LogDebug("Create file {Title} on Google drive", title);
@@ -65,6 +69,19 @@ public class SpreadsheetService : ISpreadsheetService
             .ExecuteAsync(token);
 
         return new SpreadsheetCreateResult(spreadsheetId);
+    }
+
+    public async Task<GoogleSpreadsheet?> FindSpreadsheetAsync(string id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            Spreadsheet spreadsheet = await _sheetsService.Spreadsheets.Get(id).ExecuteAsync(cancellationToken);
+            return new GoogleSpreadsheet(spreadsheet.SpreadsheetId, spreadsheet.Properties.Title);
+        }
+        catch (GoogleApiException e) when (e.HttpStatusCode is HttpStatusCode.NotFound)
+        {
+            return null;
+        }
     }
 
     private async Task ConfigureDefaultSheetAsync(string spreadsheetId, CancellationToken token)

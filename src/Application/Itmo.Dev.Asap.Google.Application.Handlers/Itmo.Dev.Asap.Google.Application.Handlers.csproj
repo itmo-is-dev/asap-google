@@ -11,7 +11,6 @@
       <ProjectReference Include="..\ITMO.Dev.ASAP.Google.Application.Contracts\ITMO.Dev.ASAP.Google.Application.Contracts.csproj" />
       <ProjectReference Include="..\Abstractions\ITMO.Dev.ASAP.Google.Application.DataAccess\ITMO.Dev.ASAP.Google.Application.DataAccess.csproj" />
       <ProjectReference Include="..\Abstractions\ITMO.Dev.ASAP.Google.Application.Spreadsheets\ITMO.Dev.ASAP.Google.Application.Spreadsheets.csproj" />
-      <ProjectReference Include="..\ITMO.Dev.ASAP.Google.Application.Mapping\ITMO.Dev.ASAP.Google.Application.Mapping.csproj" />
     </ItemGroup>
 
     <ItemGroup>

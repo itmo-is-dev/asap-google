@@ -1,7 +1,7 @@
+using Itmo.Dev.Asap.Google.Application.Abstractions.Enrichment;
 using Itmo.Dev.Asap.Google.Application.DataAccess;
 using Itmo.Dev.Asap.Google.Application.DataAccess.Queries;
 using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
-using Itmo.Dev.Asap.Google.Application.Mapping;
 using MediatR;
 using static Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.FindSubjectCoursesById;
 
@@ -10,10 +10,12 @@ namespace Itmo.Dev.Asap.Google.Application.Handlers.SubjectCourses;
 internal class FindSubjectCoursesByIdsHandler : IRequestHandler<Query, Response>
 {
     private readonly IPersistenceContext _context;
+    private readonly IGoogleSubjectCourseEnricher _enricher;
 
-    public FindSubjectCoursesByIdsHandler(IPersistenceContext context)
+    public FindSubjectCoursesByIdsHandler(IPersistenceContext context, IGoogleSubjectCourseEnricher enricher)
     {
         _context = context;
+        _enricher = enricher;
     }
 
     public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
@@ -22,7 +24,7 @@ internal class FindSubjectCoursesByIdsHandler : IRequestHandler<Query, Response>
 
         GoogleSubjectCourseDto[] dto = await _context.SubjectCourses
             .QueryAsync(query, cancellationToken)
-            .Select(x => x.ToDto())
+            .SelectAwait(async x => await _enricher.EnrichAsync(x, cancellationToken))
             .ToArrayAsync(cancellationToken);
 
         return new Response(dto);

@@ -16,4 +16,5 @@ message FindByIdsResponse {
 message GoogleSubjectCourse {
   string id = 1;
   string spreadsheet_id = 2;
+  string spreadsheet_name = 3;
 }
