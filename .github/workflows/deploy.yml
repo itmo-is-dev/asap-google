@@ -99,6 +99,6 @@ jobs:
             -d \
             -t \
             -v /var/log/Serilogs/asap-google:/app/Serilogs/asap-google \
-            --network asap-kafka_asap-kafka \
+            --network asap-network \
             --restart=unless-stopped \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.environment-set.outputs.branch }}
