@@ -7,9 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Abstractions\ITMO.Dev.ASAP.Google.Application.DataAccess\ITMO.Dev.ASAP.Google.Application.DataAccess.csproj" />
-      <ProjectReference Include="..\..\Application\Abstractions\ITMO.Dev.ASAP.Google.Application.Spreadsheets\ITMO.Dev.ASAP.Google.Application.Spreadsheets.csproj" />
-      <ProjectReference Include="..\..\ITMO.Dev.ASAP.Google.Common\ITMO.Dev.ASAP.Google.Common.csproj" />
+      <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.Spreadsheets\Itmo.Dev.Asap.Google.Application.Spreadsheets.csproj" />
+      <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -17,12 +17,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application.Enrichment\Itmo.Dev.Asap.Google.Application.Enrichment.csproj" />
-        <ProjectReference Include="..\Application\ITMO.Dev.ASAP.Google.Application.Handlers\ITMO.Dev.ASAP.Google.Application.Handlers.csproj" />
-        <ProjectReference Include="..\Application\ITMO.Dev.ASAP.Google.Application\ITMO.Dev.ASAP.Google.Application.csproj" />
+        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application.Handlers\Itmo.Dev.Asap.Google.Application.Handlers.csproj" />
+        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application\Itmo.Dev.Asap.Google.Application.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Caching\Itmo.Dev.Asap.Google.Caching.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.DataAccess\Itmo.Dev.Asap.Google.DataAccess.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Integrations.Github\Itmo.Dev.Asap.Google.Integrations.Github.csproj" />
-        <ProjectReference Include="..\Infrastructure\ITMO.Dev.ASAP.Google.Spreadsheets\ITMO.Dev.ASAP.Google.Spreadsheets.csproj" />
+        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Spreadsheets\Itmo.Dev.Asap.Google.Spreadsheets.csproj" />
         <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Grpc\Itmo.Dev.Asap.Google.Presentation.Grpc.csproj" />
         <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Kafka\Itmo.Dev.Asap.Google.Presentation.Kafka.csproj" />
     </ItemGroup>

@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    
+
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore"/>
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection"/>
@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Application\ITMO.Dev.ASAP.Google.Application.Contracts\ITMO.Dev.ASAP.Google.Application.Contracts.csproj"/>
+        <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Contracts\Itmo.Dev.Asap.Google.Application.Contracts.csproj"/>
     </ItemGroup>
 
 </Project>

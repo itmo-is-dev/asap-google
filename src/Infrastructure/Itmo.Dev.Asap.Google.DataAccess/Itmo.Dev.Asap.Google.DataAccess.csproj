@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Application\Abstractions\ITMO.Dev.ASAP.Google.Application.DataAccess\ITMO.Dev.ASAP.Google.Application.DataAccess.csproj"/>
+      <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.DataAccess\Itmo.Dev.Asap.Google.Application.DataAccess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
