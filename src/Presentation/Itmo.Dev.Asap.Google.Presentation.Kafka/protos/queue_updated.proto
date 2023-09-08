@@ -12,13 +12,13 @@ message QueueUpdatedKey {
 
 message QueueUpdatedValue {
   string subject_course_id = 1;
-  string group_id = 2;
-  SubmissionQueue submissions_queue = 3;
+  string student_group_id = 2;
+  string student_group_name = 3;
+  SubmissionQueue submissions_queue = 4;
 
   message SubmissionQueue {
-    string group_name = 1;
-    map<string, Student> students = 2;
-    repeated Submission submissions = 3;
+    map<string, Student> students = 1;
+    repeated Submission submissions = 2;
   }
 
   message Student {
