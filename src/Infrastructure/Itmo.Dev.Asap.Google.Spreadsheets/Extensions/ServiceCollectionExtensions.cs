@@ -20,8 +20,10 @@ public static class ServiceCollectionExtensions
             .AddOptions<GoogleIntegrationConfiguration>()
             .BindConfiguration("Infrastructure:Spreadsheets");
 
-        collection.AddSingleton<ISpreadsheetService, SpreadsheetService>();
-        collection.AddSingleton<ISheetService, SheetService>();
+        collection
+            .AddSingleton<ISpreadsheetService, SpreadsheetService>()
+            .Decorate<ISpreadsheetService, CachedSpreadsheetService>()
+            .AddSingleton<ISheetService, SheetService>();
 
         collection.AddSingleton<BaseClientService.Initializer>(p =>
         {

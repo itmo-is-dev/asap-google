@@ -3,6 +3,7 @@
 using Itmo.Dev.Asap.Google.Application.Enrichment.Extensions;
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Handlers.Extensions;
+using Itmo.Dev.Asap.Google.Caching.Extensions;
 using Itmo.Dev.Asap.Google.DataAccess.Extensions;
 using Itmo.Dev.Asap.Google.Integrations.Github.Extensions;
 using Itmo.Dev.Asap.Google.Presentation.Grpc.Extensions;
@@ -20,6 +21,7 @@ builder.Services
     .AddGoogleApplication()
     .AddGoogleApplicationHandlers()
     .AddEnrichment()
+    .AddGoogleCaching()
     .AddGoogleInfrastructureIntegration()
     .AddGithubIntegration()
     .AddDataAccess()

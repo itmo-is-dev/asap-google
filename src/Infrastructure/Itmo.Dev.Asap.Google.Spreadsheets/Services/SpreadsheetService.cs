@@ -43,7 +43,7 @@ public class SpreadsheetService : ISpreadsheetService
         _logger = logger;
     }
 
-    public async Task<SpreadsheetCreateResult> CreateSpreadsheetAsync(string title, CancellationToken token)
+    public async Task<SpreadsheetCreateResult> CreateSpreadsheetAsync(string title, CancellationToken cancellationToken)
     {
         var spreadsheetToCreate = new File
         {
@@ -56,17 +56,17 @@ public class SpreadsheetService : ISpreadsheetService
 
         File spreadsheetFile = await _driveService.Files
             .Create(spreadsheetToCreate)
-            .ExecuteAsync(token);
+            .ExecuteAsync(cancellationToken);
 
         string spreadsheetId = spreadsheetFile.Id;
 
-        await ConfigureDefaultSheetAsync(spreadsheetId, token);
+        await ConfigureDefaultSheetAsync(spreadsheetId, cancellationToken);
 
         _logger.LogDebug("Update permission of file: {Title}", title);
 
         await _driveService.Permissions
             .Create(AnyoneViewerPermission, spreadsheetId)
-            .ExecuteAsync(token);
+            .ExecuteAsync(cancellationToken);
 
         return new SpreadsheetCreateResult(spreadsheetId);
     }

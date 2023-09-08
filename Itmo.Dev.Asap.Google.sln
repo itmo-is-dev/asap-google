@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Integr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Application.Enrichment", "src\Application\Itmo.Dev.Asap.Google.Application.Enrichment\Itmo.Dev.Asap.Google.Application.Enrichment.csproj", "{87399DC4-E82F-4A52-8A5C-827761F50C39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Caching", "src\Infrastructure\Itmo.Dev.Asap.Google.Caching\Itmo.Dev.Asap.Google.Caching.csproj", "{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,7 @@ Global
 		{03C31493-6F86-4B51-8372-2A31D6E4B9DD} = {4D075529-4230-4409-B605-9D3B3CFD24C6}
 		{81D90E08-7CB4-4DFD-95C2-77BAEF7A9AF5} = {33029BA9-E5ED-4B29-A1ED-96C4E168A1B3}
 		{87399DC4-E82F-4A52-8A5C-827761F50C39} = {CAF2ED06-323D-4F75-BE50-A923BEA7E8A5}
+		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE} = {33029BA9-E5ED-4B29-A1ED-96C4E168A1B3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{685F3641-6C03-4A30-9359-51B1A816D49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -160,5 +163,9 @@ Global
 		{87399DC4-E82F-4A52-8A5C-827761F50C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87399DC4-E82F-4A52-8A5C-827761F50C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87399DC4-E82F-4A52-8A5C-827761F50C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
