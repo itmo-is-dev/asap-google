@@ -1,3 +1,4 @@
+using Itmo.Dev.Asap.Google.Application.Github.Models;
 using Itmo.Dev.Asap.Google.Application.Github.Services;
 using Itmo.Dev.Asap.Google.Presentation.Kafka.Mappers;
 using Itmo.Dev.Asap.Kafka;
@@ -39,24 +40,16 @@ public class SubjectCoursePointsUpdatedHandler
             .SelectMany(x => x.Value.Points.Students)
             .Select(x => x.User.Id);
 
-        Dictionary<Guid, Application.Github.Models.GithubUserDto> githubUsers = await _githubUserService
+        Dictionary<Guid, GithubUserDto> githubUsers = await _githubUserService
             .FindByIdsAsync(studentIds, cancellationToken)
             .ToDictionaryAsync(x => x.Id, cancellationToken);
-
-        if (githubUsers.Count is 0)
-        {
-            IEnumerable<string> userIds = latest
-                .SelectMany(x => x.Value.Points.Students)
-                .Select(x => x.User.Id);
-
-            _logger.LogInformation("Found no github accounts for users = {Users}", string.Join(", ", userIds));
-        }
 
         IEnumerable<Notification> notifications = latest
             .Select(x => x.Value.MapTo(githubUsers));
 
         foreach (Notification notification in notifications)
         {
+            _logger.LogInformation("Publishing notification = {Notification}", notification);
             await _mediator.Publish(notification, cancellationToken);
         }
     }
