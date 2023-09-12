@@ -49,7 +49,10 @@ public class SubjectCoursePointsUpdatedHandler
 
         foreach (Notification notification in notifications)
         {
-            _logger.LogInformation("Publishing notification = {Notification}", notification);
+            _logger.LogInformation(
+                "Publishing notification with students = {Students}",
+                string.Join(", ", notification.Points.Students.Values));
+
             await _mediator.Publish(notification, cancellationToken);
         }
     }
