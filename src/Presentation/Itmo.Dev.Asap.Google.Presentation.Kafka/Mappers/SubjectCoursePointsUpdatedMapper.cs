@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
 using Itmo.Dev.Asap.Google.Application.Dto.Users;
 using Itmo.Dev.Asap.Google.Application.Github.Models;
@@ -46,4 +47,7 @@ internal static partial class SubjectCoursePointsUpdatedMapper
 
     private static partial SubjectCoursePointsDto.StudentPointsDto ToDto(
         this SubjectCoursePointsUpdatedValue.Types.StudentPoints points);
+
+    private static DateOnly MapToDateOnly(Timestamp timestamp)
+        => DateOnly.FromDateTime(timestamp.ToDateTime());
 }
