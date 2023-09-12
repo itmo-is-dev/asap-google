@@ -6,7 +6,6 @@ using Itmo.Dev.Platform.Kafka.Consumer;
 using Itmo.Dev.Platform.Kafka.Consumer.Models;
 using Itmo.Dev.Platform.Kafka.Extensions;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using static Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.Notifications.SubjectCoursePointsUpdated;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Kafka.Handlers;
@@ -16,16 +15,13 @@ public class SubjectCoursePointsUpdatedHandler
 {
     private readonly IMediator _mediator;
     private readonly IGithubUserService _githubUserService;
-    private readonly ILogger<SubjectCoursePointsUpdatedHandler> _logger;
 
     public SubjectCoursePointsUpdatedHandler(
         IMediator mediator,
-        IGithubUserService githubUserService,
-        ILogger<SubjectCoursePointsUpdatedHandler> logger)
+        IGithubUserService githubUserService)
     {
         _mediator = mediator;
         _githubUserService = githubUserService;
-        _logger = logger;
     }
 
     public async ValueTask HandleAsync(
@@ -43,8 +39,6 @@ public class SubjectCoursePointsUpdatedHandler
         Dictionary<Guid, GithubUserDto> githubUsers = await _githubUserService
             .FindByIdsAsync(studentIds, cancellationToken)
             .ToDictionaryAsync(x => x.Id, cancellationToken);
-
-        _logger.LogInformation("Received github users = {Users}", githubUsers.Values);
 
         IEnumerable<Notification> notifications = latest
             .Select(x => x.Value.MapTo(githubUsers));
