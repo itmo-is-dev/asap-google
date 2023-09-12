@@ -44,15 +44,13 @@ public class SubjectCoursePointsUpdatedHandler
             .FindByIdsAsync(studentIds, cancellationToken)
             .ToDictionaryAsync(x => x.Id, cancellationToken);
 
+        _logger.LogInformation("Received github users = {Users}", githubUsers.Values);
+
         IEnumerable<Notification> notifications = latest
             .Select(x => x.Value.MapTo(githubUsers));
 
         foreach (Notification notification in notifications)
         {
-            _logger.LogInformation(
-                "Publishing notification with students = {Students}",
-                string.Join(", ", notification.Points.Students.Values));
-
             await _mediator.Publish(notification, cancellationToken);
         }
     }
