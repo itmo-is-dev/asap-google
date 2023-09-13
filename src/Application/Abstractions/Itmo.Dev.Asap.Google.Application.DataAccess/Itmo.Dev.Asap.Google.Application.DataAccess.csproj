@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Domain\ITMO.Dev.ASAP.Google.Domain\ITMO.Dev.ASAP.Google.Domain.csproj" />
+      <ProjectReference Include="..\..\..\Domain\Itmo.Dev.Asap.Google.Domain\Itmo.Dev.Asap.Google.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

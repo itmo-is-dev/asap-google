@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-<!--      <ProjectReference Include="..\..\..\core\Application\ITMO.Dev.ASAP.Application.Contracts\ITMO.Dev.ASAP.Application.Contracts.csproj" />-->
-      <ProjectReference Include="..\ITMO.Dev.ASAP.Google.Application.Dto\ITMO.Dev.ASAP.Google.Application.Dto.csproj" />
+      <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Dto\Itmo.Dev.Asap.Google.Application.Dto.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -16,10 +15,10 @@
     </ItemGroup>
     
     <ItemGroup>
-        <InternalsVisibleTo Include="ITMO.Dev.ASAP.Google.Presentation.Services" />
-        <InternalsVisibleTo Include="ITMO.Dev.ASAP.Google.Presentation.Grpc" />
-        <InternalsVisibleTo Include="ITMO.Dev.ASAP.Google.Presentation.Kafka" />
-        <InternalsVisibleTo Include="ITMO.Dev.ASAP.Google.Application.Handlers" />
+        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Services" />
+        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Grpc" />
+        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Kafka" />
+        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Application.Handlers" />
     </ItemGroup>
 
 </Project>

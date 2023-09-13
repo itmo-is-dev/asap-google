@@ -1,3 +1,4 @@
+using Itmo.Dev.Asap.Google.Application.Github.Models;
 using Itmo.Dev.Asap.Google.Application.Github.Services;
 using Itmo.Dev.Asap.Google.Presentation.Kafka.Mappers;
 using Itmo.Dev.Asap.Kafka;
@@ -15,7 +16,9 @@ public class SubjectCoursePointsUpdatedHandler
     private readonly IMediator _mediator;
     private readonly IGithubUserService _githubUserService;
 
-    public SubjectCoursePointsUpdatedHandler(IMediator mediator, IGithubUserService githubUserService)
+    public SubjectCoursePointsUpdatedHandler(
+        IMediator mediator,
+        IGithubUserService githubUserService)
     {
         _mediator = mediator;
         _githubUserService = githubUserService;
@@ -33,7 +36,7 @@ public class SubjectCoursePointsUpdatedHandler
             .SelectMany(x => x.Value.Points.Students)
             .Select(x => x.User.Id);
 
-        Dictionary<Guid, Application.Github.Models.GithubUserDto> githubUsers = await _githubUserService
+        Dictionary<Guid, GithubUserDto> githubUsers = await _githubUserService
             .FindByIdsAsync(studentIds, cancellationToken)
             .ToDictionaryAsync(x => x.Id, cancellationToken);
 

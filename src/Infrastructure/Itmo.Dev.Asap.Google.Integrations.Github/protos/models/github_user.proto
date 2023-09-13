@@ -3,5 +3,6 @@ option csharp_namespace = "Itmo.Dev.Asap.Github.Models";
 
 message GithubUser {
   string user_id = 1;
-  string username = 2;
+  int64 github_id = 2;
+  string username = 3;
 }
