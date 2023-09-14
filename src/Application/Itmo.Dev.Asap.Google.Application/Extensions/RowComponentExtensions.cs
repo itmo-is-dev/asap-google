@@ -65,7 +65,7 @@ internal static class RowComponentExtensions
             return row;
 
         CourseStudentsDto.StudentDto student1 = points.Students[rowNumber];
-        CourseStudentsDto.StudentDto student2 = points.Students[rowNumber - 2];
+        CourseStudentsDto.StudentDto student2 = points.Students[rowNumber - 1];
 
         if (student1.GroupName != student2.GroupName)
             row = row.WithTopMediumBorder();
