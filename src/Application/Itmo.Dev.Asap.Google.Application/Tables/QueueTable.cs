@@ -17,6 +17,7 @@ public class QueueTable : RowTable<SubmissionsQueueDto>
         Label("ФИО").WithColumnWidth(2).WithFrozenRows(),
         Label("Группа"),
         Label("Лабораторная работа").WithColumnWidth(1.2),
+        Label("Код"),
         Label("Дата").WithColumnWidth(1.2),
         Label("Статус"),
         Label("GitHub").WithColumnWidth(3.2).WithTrailingMediumBorder());
@@ -55,6 +56,7 @@ public class QueueTable : RowTable<SubmissionsQueueDto>
                 Label(_userFullNameFormatter.GetFullName(student.User)),
                 Label(student.GroupName),
                 Label(submission.AssignmentShortName),
+                Label(submission.Code),
                 Label(submission.SubmissionDate, _cultureInfoProvider.GetCultureInfo()),
                 Label(submission.State.ToString()),
                 Label(submission.Payload).WithTrailingMediumBorder()

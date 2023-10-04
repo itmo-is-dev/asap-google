@@ -6,4 +6,5 @@ public record SubmissionDto(
     DateTime SubmissionDate,
     string Payload,
     string AssignmentShortName,
-    SubmissionStateDto State);
+    SubmissionStateDto State,
+    int Code);
