@@ -41,6 +41,7 @@ message QueueUpdatedValue {
     string payload = 4;
     string assignment_short_name = 5;
     SubmissionState state = 6;
+    int32 code = 7;
   }
 
   enum SubmissionState {
