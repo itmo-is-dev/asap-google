@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Itmo.Dev.Asap.Google.DataAccess.Repositories;
 
-public class SubjectCourseRepository : ISubjectCourseRepository
+internal class SubjectCourseRepository : ISubjectCourseRepository
 {
     private readonly IPostgresConnectionProvider _connectionProvider;
     private readonly IUnitOfWork _unitOfWork;

@@ -14,7 +14,10 @@ public static class ServiceCollectionExtensions
             .BindConfiguration("Infrastructure:DataAccess:PostgresConfiguration"));
 
         collection.AddScoped<IPersistenceContext, PersistenceContext>();
+
         collection.AddScoped<ISubjectCourseRepository, SubjectCourseRepository>();
+        collection.AddScoped<ISubjectCourseStudentRepository, SubjectCourseStudentRepository>();
+        collection.AddScoped<ISubjectCourseAssignmentRepository, SubjectCourseAssignmentRepository>();
 
         collection.AddPlatformMigrations(typeof(IAssemblyMarker).Assembly);
 

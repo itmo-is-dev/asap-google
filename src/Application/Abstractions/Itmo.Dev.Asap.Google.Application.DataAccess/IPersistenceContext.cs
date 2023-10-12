@@ -7,6 +7,10 @@ public interface IPersistenceContext
 {
     ISubjectCourseRepository SubjectCourses { get; }
 
+    ISubjectCourseStudentRepository SubjectCourseStudents { get; }
+
+    ISubjectCourseAssignmentRepository SubjectCourseAssignments { get; }
+
     ValueTask CommitAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken);
 
     ValueTask CommitAsync(CancellationToken cancellationToken);

@@ -1,6 +1,6 @@
 using FluentSpreadsheets;
+using FluentSpreadsheets.GoogleSheets.Models;
 using FluentSpreadsheets.GoogleSheets.Rendering;
-using FluentSpreadsheets.Rendering;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Models;
@@ -15,26 +15,27 @@ public class PointsSheet : ISheet<CourseStudentsDto>
     public const string Title = SheetConfigurations.Points.Title;
 
     private readonly ITable<CourseStudentsDto> _pointsTable;
-    private readonly IComponentRenderer<GoogleSheetRenderCommand> _renderer;
+    private readonly IGoogleSheetsComponentRenderer _renderer;
 
     private readonly ISheetService _sheetService;
 
     public PointsSheet(
         ISheetService sheetService,
         ITable<CourseStudentsDto> pointsTable,
-        IComponentRenderer<GoogleSheetRenderCommand> renderer)
+        IGoogleSheetsComponentRenderer renderer)
     {
         _sheetService = sheetService;
         _pointsTable = pointsTable;
         _renderer = renderer;
     }
 
-    public async Task UpdateAsync(string spreadsheetId, CourseStudentsDto model, CancellationToken token)
+    public async Task UpdateAsync(string spreadsheetId, CourseStudentsDto model, CancellationToken cancellationToken)
     {
-        SheetId sheetId = await _sheetService.CreateSheetAsync(spreadsheetId, Title, token);
+        SheetId sheetId = await _sheetService.CreateSheetAsync(spreadsheetId, Title, cancellationToken);
 
-        IComponent sheetData = _pointsTable.Render(model);
-        var renderCommand = new GoogleSheetRenderCommand(spreadsheetId, sheetId.Value, Title, sheetData);
-        await _renderer.RenderAsync(renderCommand, token);
+        IComponent component = _pointsTable.Render(model);
+        var sheetInfo = new SheetInfo(spreadsheetId, sheetId.Value, Title);
+
+        await _renderer.RenderAsync(component, sheetInfo, cancellationToken);
     }
 }

@@ -1,6 +1,5 @@
-using FluentSpreadsheets.GoogleSheets.Factories;
-using FluentSpreadsheets.GoogleSheets.Rendering;
-using FluentSpreadsheets.Rendering;
+using FluentSpreadsheets;
+using FluentSpreadsheets.GoogleSheets.Extensions;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Models;
@@ -30,8 +29,8 @@ public static class ServiceCollectionExtensions
             .AddSingleton<ITable<SubmissionsQueueDto>, QueueTable>();
 
         collection
-            .AddSingleton<IRenderCommandFactory, RenderCommandFactory>()
-            .AddSingleton<IComponentRenderer<GoogleSheetRenderCommand>, GoogleSheetComponentRenderer>();
+            .AddFluentSpreadsheets()
+            .AddGoogleSheets();
 
         collection
             .AddSingleton<IUserFullNameFormatter, UserFullNameFormatter>()
