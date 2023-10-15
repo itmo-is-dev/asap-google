@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+      <PackageReference Include="SourceKit.Generators.Builder" />
     </ItemGroup>
 
 </Project>

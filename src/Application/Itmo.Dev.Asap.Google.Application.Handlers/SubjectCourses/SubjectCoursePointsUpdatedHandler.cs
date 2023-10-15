@@ -1,6 +1,8 @@
 using Itmo.Dev.Asap.Google.Application.Abstractions;
 using Itmo.Dev.Asap.Google.Application.DataAccess;
 using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
+using Itmo.Dev.Asap.Google.Domain.Assignments;
+using Itmo.Dev.Asap.Google.Domain.Students;
 using Itmo.Dev.Asap.Google.Domain.SubjectCourses;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -38,10 +40,33 @@ internal class SubjectCoursePointsUpdatedHandler : INotificationHandler<Notifica
             return;
         }
 
+        await UpdateSubjectCourseEntitiesAsync(notification, cancellationToken);
         await _sheet.UpdateAsync(subjectCourse.SpreadsheetId, notification.Points, cancellationToken);
 
         _logger.LogInformation(
             "Successfully updated points sheet of course {SubjectCourseId}",
             notification.SubjectCourseId);
+    }
+
+    private async Task UpdateSubjectCourseEntitiesAsync(Notification notification, CancellationToken cancellationToken)
+    {
+        SubjectCourseStudent[] students = notification.Points.Students
+            .Select((student, i) => new SubjectCourseStudent(
+                StudentId: student.Value.User.Id,
+                SubjectCourseId: notification.SubjectCourseId,
+                Ordinal: i))
+            .ToArray();
+
+        SubjectCourseAssignment[] assignments = notification.Points.Assignments
+            .Select((assignment, i) => new SubjectCourseAssignment(
+                SubjectCourseId: notification.SubjectCourseId,
+                AssignmentId: assignment.Value.Id,
+                Ordinal: i))
+            .ToArray();
+
+        _context.SubjectCourseStudents.AddOrUpdateRange(students);
+        _context.SubjectCourseAssignments.AddOrUpdateRange(assignments);
+
+        await _context.CommitAsync(cancellationToken);
     }
 }

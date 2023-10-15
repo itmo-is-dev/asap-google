@@ -9,13 +9,23 @@ public class PersistenceContext : IPersistenceContext
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public PersistenceContext(IUnitOfWork unitOfWork, ISubjectCourseRepository subjectCourses)
+    public PersistenceContext(
+        IUnitOfWork unitOfWork,
+        ISubjectCourseRepository subjectCourses,
+        ISubjectCourseStudentRepository subjectCourseStudents,
+        ISubjectCourseAssignmentRepository subjectCourseAssignments)
     {
         _unitOfWork = unitOfWork;
         SubjectCourses = subjectCourses;
+        SubjectCourseStudents = subjectCourseStudents;
+        SubjectCourseAssignments = subjectCourseAssignments;
     }
 
     public ISubjectCourseRepository SubjectCourses { get; }
+
+    public ISubjectCourseStudentRepository SubjectCourseStudents { get; }
+
+    public ISubjectCourseAssignmentRepository SubjectCourseAssignments { get; }
 
     public ValueTask CommitAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
     {
