@@ -1,6 +1,6 @@
 using FluentSpreadsheets;
+using FluentSpreadsheets.GoogleSheets.Models;
 using FluentSpreadsheets.GoogleSheets.Rendering;
-using FluentSpreadsheets.Rendering;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions;
 using Itmo.Dev.Asap.Google.Application.Dto.Submissions;
@@ -12,27 +12,28 @@ namespace Itmo.Dev.Asap.Google.Application.Sheets;
 public class QueueSheet : ISheet<SubmissionsQueueDto>
 {
     private readonly ITable<SubmissionsQueueDto> _queueTable;
-    private readonly IComponentRenderer<GoogleSheetRenderCommand> _renderer;
+    private readonly IGoogleSheetsComponentRenderer _renderer;
     private readonly ISheetService _sheetService;
 
     public QueueSheet(
         ISheetService sheetService,
         ITable<SubmissionsQueueDto> queueTable,
-        IComponentRenderer<GoogleSheetRenderCommand> renderer)
+        IGoogleSheetsComponentRenderer renderer)
     {
         _sheetService = sheetService;
         _queueTable = queueTable;
         _renderer = renderer;
     }
 
-    public async Task UpdateAsync(string spreadsheetId, SubmissionsQueueDto model, CancellationToken token)
+    public async Task UpdateAsync(string spreadsheetId, SubmissionsQueueDto model, CancellationToken cancellationToken)
     {
         string title = model.GroupName;
 
-        SheetId sheetId = await _sheetService.CreateOrClearSheetAsync(spreadsheetId, title, token);
+        SheetId sheetId = await _sheetService.CreateOrClearSheetAsync(spreadsheetId, title, cancellationToken);
 
-        IComponent sheetData = _queueTable.Render(model);
-        var renderCommand = new GoogleSheetRenderCommand(spreadsheetId, sheetId.Value, title, sheetData);
-        await _renderer.RenderAsync(renderCommand, token);
+        IComponent component = _queueTable.Render(model);
+        var sheetInfo = new SheetInfo(spreadsheetId, sheetId.Value, title);
+
+        await _renderer.RenderAsync(component, sheetInfo, cancellationToken);
     }
 }

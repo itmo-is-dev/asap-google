@@ -1,6 +1,6 @@
 using FluentSpreadsheets;
+using FluentSpreadsheets.GoogleSheets.Models;
 using FluentSpreadsheets.GoogleSheets.Rendering;
-using FluentSpreadsheets.Rendering;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Abstractions;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Models;
@@ -17,13 +17,13 @@ public class LabsSheet : ISheet<SubjectCoursePointsDto>
 
     private readonly ISheet<CourseStudentsDto> _pointsSheet;
     private readonly ITable<SubjectCoursePointsDto> _pointsTable;
-    private readonly IComponentRenderer<GoogleSheetRenderCommand> _renderer;
+    private readonly IGoogleSheetsComponentRenderer _renderer;
     private readonly ISheetService _sheetService;
 
     public LabsSheet(
         ISheetService sheetService,
         ITable<SubjectCoursePointsDto> pointsTable,
-        IComponentRenderer<GoogleSheetRenderCommand> renderer,
+        IGoogleSheetsComponentRenderer renderer,
         ISheet<CourseStudentsDto> pointsSheet)
     {
         _sheetService = sheetService;
@@ -32,15 +32,20 @@ public class LabsSheet : ISheet<SubjectCoursePointsDto>
         _pointsSheet = pointsSheet;
     }
 
-    public async Task UpdateAsync(string spreadsheetId, SubjectCoursePointsDto model, CancellationToken token)
+    public async Task UpdateAsync(
+        string spreadsheetId,
+        SubjectCoursePointsDto model,
+        CancellationToken cancellationToken)
     {
-        SheetId sheetId = await _sheetService.CreateOrClearSheetAsync(spreadsheetId, Title, token);
+        SheetId sheetId = await _sheetService.CreateOrClearSheetAsync(spreadsheetId, Title, cancellationToken);
 
-        IComponent sheetData = _pointsTable.Render(model);
-        var renderCommand = new GoogleSheetRenderCommand(spreadsheetId, sheetId.Value, Title, sheetData);
-        await _renderer.RenderAsync(renderCommand, token);
+        IComponent component = _pointsTable.Render(model);
+        var sheetInfo = new SheetInfo(spreadsheetId, sheetId.Value, Title);
 
-        bool pointsSheetExists = await _sheetService.SheetExistsAsync(spreadsheetId, PointsSheet.Title, token);
+        await _renderer.RenderAsync(component, sheetInfo, cancellationToken);
+
+        bool pointsSheetExists = await _sheetService
+            .SheetExistsAsync(spreadsheetId, PointsSheet.Title, cancellationToken);
 
         if (pointsSheetExists is false)
         {
@@ -49,7 +54,7 @@ public class LabsSheet : ISheet<SubjectCoursePointsDto>
                 .ToArray();
 
             var courseStudents = new CourseStudentsDto(students);
-            await _pointsSheet.UpdateAsync(spreadsheetId, courseStudents, token);
+            await _pointsSheet.UpdateAsync(spreadsheetId, courseStudents, cancellationToken);
         }
     }
 }
