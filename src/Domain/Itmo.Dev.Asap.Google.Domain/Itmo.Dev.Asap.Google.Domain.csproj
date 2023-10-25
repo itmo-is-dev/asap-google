@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentSpreadsheets" />
       <PackageReference Include="RichEntity" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
     </ItemGroup>
 
 </Project>

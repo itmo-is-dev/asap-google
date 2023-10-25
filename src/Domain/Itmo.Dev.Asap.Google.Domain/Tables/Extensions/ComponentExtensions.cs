@@ -1,7 +1,7 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.Styles;
 
-namespace Itmo.Dev.Asap.Google.Application.Extensions;
+namespace Itmo.Dev.Asap.Google.Domain.Tables.Extensions;
 
 internal static class ComponentExtensions
 {

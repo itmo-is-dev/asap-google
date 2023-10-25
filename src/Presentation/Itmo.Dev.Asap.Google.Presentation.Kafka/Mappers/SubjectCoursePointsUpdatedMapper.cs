@@ -19,35 +19,43 @@ internal static partial class SubjectCoursePointsUpdatedMapper
             .Select(x => x.ToDto())
             .ToDictionary(x => x.Id);
 
-        var students = message.Points.Students
-            .Select(x =>
+        SubjectCoursePointsDto.StudentPointsDto[] studentPoints = message.Points.Students
+            .Join(
+                message.Points.Points,
+                x => x.User.Id,
+                x => x.StudentId,
+                (s, p) => (student: s, points: p.Points))
+            .Select(tuple =>
             {
-                UserDto user = x.User.ToDto();
+                var userId = Guid.Parse(tuple.student.User.Id);
 
-                string? githubUsername = githubUsers.TryGetValue(user.Id, out GithubUserDto? githubUser)
+                string? githubUsername = githubUsers.TryGetValue(userId, out GithubUserDto? githubUser)
                     ? githubUser.GithubUsername
                     : null;
 
-                return new SubjectCoursePointsDto.StudentDto(user, x.GroupName, githubUsername);
-            })
-            .ToDictionary(x => x.User.Id);
+                var student = new SubjectCoursePointsDto.StudentDto(
+                    tuple.student.User.ToDto(),
+                    tuple.student.GroupName,
+                    githubUsername);
 
-        SubjectCoursePointsDto.StudentPointsDto[] studentPoints = message.Points.Points
-            .Select(x => x.ToDto())
+                var points = tuple.points.Select(Map).ToDictionary(x => x.AssignmentId);
+
+                return new SubjectCoursePointsDto.StudentPointsDto(student, points);
+            })
             .ToArray();
 
-        var points = new SubjectCoursePointsDto(assignments, students, studentPoints);
-
-        return new Notification(Guid.Parse(message.SubjectCourseId), points);
+        return new Notification(
+            Guid.Parse(message.SubjectCourseId),
+            new SubjectCoursePointsDto(assignments, studentPoints));
     }
+
+    private static DateOnly MapToDateOnly(Timestamp timestamp)
+        => DateOnly.FromDateTime(timestamp.ToDateTime());
 
     private static partial AssignmentDto ToDto(this SubjectCoursePointsUpdatedValue.Types.Assignment assignment);
 
     private static partial UserDto ToDto(this SubjectCoursePointsUpdatedValue.Types.User user);
 
-    private static partial SubjectCoursePointsDto.StudentPointsDto ToDto(
-        this SubjectCoursePointsUpdatedValue.Types.StudentPoints points);
-
-    private static DateOnly MapToDateOnly(Timestamp timestamp)
-        => DateOnly.FromDateTime(timestamp.ToDateTime());
+    private static partial SubjectCoursePointsDto.AssignmentPointsDto Map(
+        SubjectCoursePointsUpdatedValue.Types.AssignmentPoints points);
 }

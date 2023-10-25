@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Itmo.Dev.Asap.Google.Application.Abstractions.Providers;
+namespace Itmo.Dev.Asap.Google.Common.Tools;
 
 public interface ICultureInfoProvider
 {
