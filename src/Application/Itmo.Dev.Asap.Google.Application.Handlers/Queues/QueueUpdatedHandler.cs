@@ -12,16 +12,16 @@ public class QueueUpdatedHandler : INotificationHandler<Notification>
 {
     private readonly ILogger<QueueUpdatedHandler> _logger;
     private readonly ISubjectCourseRepository _subjectCourseRepository;
-    private readonly ISheet<SubmissionsQueueDto> _sheet;
+    private readonly ITableWriter<SubmissionsQueueDto> _tableWriter;
 
     public QueueUpdatedHandler(
         ILogger<QueueUpdatedHandler> logger,
         ISubjectCourseRepository subjectCourseRepository,
-        ISheet<SubmissionsQueueDto> sheet)
+        ITableWriter<SubmissionsQueueDto> tableWriter)
     {
         _logger = logger;
         _subjectCourseRepository = subjectCourseRepository;
-        _sheet = sheet;
+        _tableWriter = tableWriter;
     }
 
     public async Task Handle(Notification notification, CancellationToken cancellationToken)
@@ -54,6 +54,6 @@ public class QueueUpdatedHandler : INotificationHandler<Notification>
             return;
         }
 
-        await _sheet.UpdateAsync(subjectCourse.SpreadsheetId, notification.SubmissionsQueue, cancellationToken);
+        await _tableWriter.UpdateAsync(subjectCourse.SpreadsheetId, notification.SubmissionsQueue, cancellationToken);
     }
 }

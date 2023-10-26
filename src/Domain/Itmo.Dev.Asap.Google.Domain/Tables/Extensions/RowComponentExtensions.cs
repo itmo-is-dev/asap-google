@@ -1,10 +1,9 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.Styles;
-using Itmo.Dev.Asap.Google.Application.Abstractions.Models;
-using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
+using Itmo.Dev.Asap.Google.Domain.SubjectCourses;
 using System.Drawing;
 
-namespace Itmo.Dev.Asap.Google.Application.Extensions;
+namespace Itmo.Dev.Asap.Google.Domain.Tables.Extensions;
 
 internal static class RowComponentExtensions
 {
@@ -39,35 +38,15 @@ internal static class RowComponentExtensions
     public static IRowComponent WithGroupSeparators(
         this IRowComponent row,
         int rowNumber,
-        SubjectCoursePointsDto points)
+        SubjectCoursePoints points)
     {
         if (rowNumber is 0)
             return row;
 
-        Guid student1Id = points.StudentPoints[rowNumber].StudentId;
-        Guid student2Id = points.StudentPoints[rowNumber - 1].StudentId;
+        SubjectCoursePoints.Student student1 = points.Students[rowNumber];
+        SubjectCoursePoints.Student student2 = points.Students[rowNumber - 1];
 
-        SubjectCoursePointsDto.StudentDto student1 = points.Students[student1Id];
-        SubjectCoursePointsDto.StudentDto student2 = points.Students[student2Id];
-
-        if (student1.GroupName != student2.GroupName)
-            row = row.WithTopMediumBorder();
-
-        return row;
-    }
-
-    public static IRowComponent WithGroupSeparators(
-        this IRowComponent row,
-        int rowNumber,
-        CourseStudentsDto points)
-    {
-        if (rowNumber is 0)
-            return row;
-
-        CourseStudentsDto.StudentDto student1 = points.Students[rowNumber];
-        CourseStudentsDto.StudentDto student2 = points.Students[rowNumber - 1];
-
-        if (student1.GroupName != student2.GroupName)
+        if (student1.Value.GroupName != student2.Value.GroupName)
             row = row.WithTopMediumBorder();
 
         return row;

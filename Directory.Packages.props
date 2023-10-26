@@ -54,7 +54,8 @@
     <PackageVersion Include="FluentChaining" Version="1.0.4" />
     <PackageVersion Include="FluentScanning" Version="2.0.1" />
     <PackageVersion Include="FluentScanning.DependencyInjection" Version="2.0.1" />
-    <PackageVersion Include="FluentSpreadsheets.GoogleSheets" Version="1.6.4" />
+    <PackageVersion Include="FluentSpreadsheets" Version="1.6.5" />
+    <PackageVersion Include="FluentSpreadsheets.GoogleSheets" Version="1.6.5" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="GitHubJwt" Version="0.0.5" />

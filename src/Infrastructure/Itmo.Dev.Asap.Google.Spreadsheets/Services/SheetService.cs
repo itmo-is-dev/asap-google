@@ -1,3 +1,4 @@
+using FluentSpreadsheets.GoogleSheets.Models;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Itmo.Dev.Asap.Google.Application.Spreadsheets.Models;
@@ -57,12 +58,6 @@ public class SheetService : ISheetService
         SheetProperties addedSheetProperties = batchUpdateResponse.Replies[0].AddSheet.Properties;
 
         return new SheetId(addedSheetProperties.SheetId!.Value);
-    }
-
-    public async Task<bool> SheetExistsAsync(string spreadsheetId, string sheetTitle, CancellationToken token)
-    {
-        SheetId? sheetId = await GetSheetIdAsync(spreadsheetId, sheetTitle, token);
-        return sheetId is not null;
     }
 
     private async Task<SheetId?> GetSheetIdAsync(string spreadsheetId, string title, CancellationToken token)
@@ -133,7 +128,26 @@ public class SheetService : ISheetService
             },
         };
 
-        var requests = new List<Request> { updateCellsRequest, unmergeCellsRequest, deleteFreezeRequest };
+        var unsetColumnWidthRequest = new Request
+        {
+            UpdateDimensionProperties = new UpdateDimensionPropertiesRequest
+            {
+                Range = new DimensionRange
+                {
+                    Dimension = Dimension.Columns,
+                    StartIndex = 0,
+                },
+                Properties = new DimensionProperties
+                {
+                    PixelSize = 120,
+                },
+            },
+        };
+
+        var requests = new List<Request>
+        {
+            updateCellsRequest, unmergeCellsRequest, deleteFreezeRequest, unsetColumnWidthRequest,
+        };
 
         _logger.LogDebug("Clear sheet with id {SheetId}", sheetId);
         await _sheetsService.ExecuteBatchUpdateAsync(spreadsheetId, requests, token);

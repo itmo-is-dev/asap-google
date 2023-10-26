@@ -20,8 +20,4 @@
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Tools\" />
-    </ItemGroup>
-
 </Project>

@@ -13,16 +13,16 @@ namespace Itmo.Dev.Asap.Google.Application.Handlers.SubjectCourses;
 internal class SubjectCoursePointsUpdatedHandler : INotificationHandler<Notification>
 {
     private readonly ILogger<SubjectCoursePointsUpdatedHandler> _logger;
-    private readonly ISheet<SubjectCoursePointsDto> _sheet;
+    private readonly ITableWriter<SubjectCoursePointsDto> _tableWriter;
     private readonly IPersistenceContext _context;
 
     public SubjectCoursePointsUpdatedHandler(
         ILogger<SubjectCoursePointsUpdatedHandler> logger,
-        ISheet<SubjectCoursePointsDto> sheet,
+        ITableWriter<SubjectCoursePointsDto> tableWriter,
         IPersistenceContext context)
     {
         _logger = logger;
-        _sheet = sheet;
+        _tableWriter = tableWriter;
         _context = context;
     }
 
@@ -41,7 +41,7 @@ internal class SubjectCoursePointsUpdatedHandler : INotificationHandler<Notifica
         }
 
         await UpdateSubjectCourseEntitiesAsync(notification, cancellationToken);
-        await _sheet.UpdateAsync(subjectCourse.SpreadsheetId, notification.Points, cancellationToken);
+        await _tableWriter.UpdateAsync(subjectCourse.SpreadsheetId, notification.Points, cancellationToken);
 
         _logger.LogInformation(
             "Successfully updated points sheet of course {SubjectCourseId}",
@@ -50,9 +50,9 @@ internal class SubjectCoursePointsUpdatedHandler : INotificationHandler<Notifica
 
     private async Task UpdateSubjectCourseEntitiesAsync(Notification notification, CancellationToken cancellationToken)
     {
-        SubjectCourseStudent[] students = notification.Points.Students
+        SubjectCourseStudent[] students = notification.Points.StudentPoints
             .Select((student, i) => new SubjectCourseStudent(
-                StudentId: student.Value.User.Id,
+                StudentId: student.Value.StudentId,
                 SubjectCourseId: notification.SubjectCourseId,
                 Ordinal: i))
             .ToArray();
