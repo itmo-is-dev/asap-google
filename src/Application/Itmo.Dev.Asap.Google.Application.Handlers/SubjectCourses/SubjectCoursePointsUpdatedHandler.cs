@@ -52,7 +52,7 @@ internal class SubjectCoursePointsUpdatedHandler : INotificationHandler<Notifica
     {
         SubjectCourseStudent[] students = notification.Points.StudentPoints
             .Select((student, i) => new SubjectCourseStudent(
-                StudentId: student.Student.User.Id,
+                StudentId: student.Value.StudentId,
                 SubjectCourseId: notification.SubjectCourseId,
                 Ordinal: i))
             .ToArray();

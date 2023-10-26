@@ -19,34 +19,36 @@ internal static partial class SubjectCoursePointsUpdatedMapper
             .Select(x => x.ToDto())
             .ToDictionary(x => x.Id);
 
-        SubjectCoursePointsDto.StudentPointsDto[] studentPoints = message.Points.Students
-            .Join(
-                message.Points.Points,
-                x => x.User.Id,
-                x => x.StudentId,
-                (s, p) => (student: s, points: p.Points))
-            .Select(tuple =>
+        SubjectCoursePointsDto.StudentDto[] students = message.Points.Students
+            .Select(x =>
             {
-                var userId = Guid.Parse(tuple.student.User.Id);
+                var userId = Guid.Parse(x.User.Id);
 
                 string? githubUsername = githubUsers.TryGetValue(userId, out GithubUserDto? githubUser)
                     ? githubUser.GithubUsername
                     : null;
 
-                var student = new SubjectCoursePointsDto.StudentDto(
-                    tuple.student.User.ToDto(),
-                    tuple.student.GroupName,
+                return new SubjectCoursePointsDto.StudentDto(
+                    x.User.ToDto(),
+                    x.GroupName,
                     githubUsername);
-
-                var points = tuple.points.Select(Map).ToDictionary(x => x.AssignmentId);
-
-                return new SubjectCoursePointsDto.StudentPointsDto(student, points);
             })
             .ToArray();
 
+        var studentPoints = message.Points.Points
+            .Select(p =>
+            {
+                var points = p.Points
+                    .Select(Map)
+                    .ToDictionary(x => x.AssignmentId);
+
+                return new SubjectCoursePointsDto.StudentPointsDto(Guid.Parse(p.StudentId), points);
+            })
+            .ToDictionary(x => x.StudentId);
+
         return new Notification(
             Guid.Parse(message.SubjectCourseId),
-            new SubjectCoursePointsDto(assignments, studentPoints));
+            new SubjectCoursePointsDto(students, assignments, studentPoints));
     }
 
     private static DateOnly MapToDateOnly(Timestamp timestamp)

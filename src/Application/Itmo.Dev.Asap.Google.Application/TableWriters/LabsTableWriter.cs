@@ -16,7 +16,7 @@ namespace Itmo.Dev.Asap.Google.Application.TableWriters;
 
 public class LabsTableWriter : ITableWriter<SubjectCoursePointsDto>
 {
-    public const string Title = SheetConfigurations.Labs.Title;
+    private const string Title = SheetConfigurations.Labs.Title;
 
     private readonly IGoogleSheetsComponentRenderer _renderer;
     private readonly ISheetService _sheetService;
@@ -47,29 +47,37 @@ public class LabsTableWriter : ITableWriter<SubjectCoursePointsDto>
 
     private static SubjectCoursePoints Map(SubjectCoursePointsDto model)
     {
-        var assignments = new DynamicReadonlyDictionary<Guid, AssignmentDto, SubjectCoursePoints.Assignment>(
+        IReadOnlyList<SubjectCoursePoints.Student> students = CollectionFactory.CreateList(model.Students, Map);
+
+        IReadOnlyDictionary<Guid, SubjectCoursePoints.Assignment> assignments = CollectionFactory.CreateDictionary(
             model.Assignments,
-            x => new SubjectCoursePoints.Assignment(x.Id, x.ShortName));
+            static x => new SubjectCoursePoints.Assignment(x.Id, x.ShortName));
 
-        SubjectCoursePoints.StudentPoints[] studentPoints = model.StudentPoints.Select(Map).ToArray();
+        IReadOnlyDictionary<Guid, SubjectCoursePoints.StudentAssignmentPoints> points = CollectionFactory
+            .CreateDictionary(model.StudentPoints, Map);
 
-        return new SubjectCoursePoints(assignments, studentPoints);
+        return new SubjectCoursePoints(students, assignments, points);
     }
 
-    private static SubjectCoursePoints.StudentPoints Map(SubjectCoursePointsDto.StudentPointsDto dto)
+    private static SubjectCoursePoints.Student Map(SubjectCoursePointsDto.StudentDto dto)
     {
         var student = new Student(
-            dto.Student.User.Id,
-            dto.Student.User.FirstName,
-            dto.Student.User.MiddleName,
-            dto.Student.User.LastName,
-            dto.Student.User.UniversityId,
-            dto.Student.GroupName);
+            dto.User.Id,
+            dto.User.FirstName,
+            dto.User.MiddleName,
+            dto.User.LastName,
+            dto.User.UniversityId,
+            dto.GroupName);
 
+        return new SubjectCoursePoints.Student(student, dto.GithubUsername);
+    }
+
+    private static SubjectCoursePoints.StudentAssignmentPoints Map(SubjectCoursePointsDto.StudentPointsDto dto)
+    {
         IReadOnlyDictionary<Guid, SubjectCoursePoints.AssignmentPoints> points = CollectionFactory.CreateDictionary(
             dto.Points,
-            x => new SubjectCoursePoints.AssignmentPoints(x.AssignmentId, x.Date, x.IsBanned, x.Points));
+            static x => new SubjectCoursePoints.AssignmentPoints(x.AssignmentId, x.Date, x.IsBanned, x.Points));
 
-        return new SubjectCoursePoints.StudentPoints(student, dto.Student.GithubUsername, points);
+        return new SubjectCoursePoints.StudentAssignmentPoints(dto.StudentId, points);
     }
 }

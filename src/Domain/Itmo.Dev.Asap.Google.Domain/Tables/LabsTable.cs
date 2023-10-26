@@ -1,7 +1,6 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Common.Tools;
-using Itmo.Dev.Asap.Google.Domain.Students;
 using Itmo.Dev.Asap.Google.Domain.SubjectCourses;
 using Itmo.Dev.Asap.Google.Domain.Tables.Extensions;
 using System.Drawing;
@@ -52,20 +51,20 @@ public class LabsTable : RowTable<SubjectCoursePoints>
 
         for (int i = 0; i < model.Students.Count; i++)
         {
-            SubjectCoursePoints.StudentPoints studentPoints = model.Students[i];
-            Student student = studentPoints.Student;
+            SubjectCoursePoints.Student student = model.Students[i];
+            SubjectCoursePoints.StudentAssignmentPoints studentAssignmentPoints = model.StudentPoints[student.Value.Id];
 
-            double totalPoints = studentPoints.Points.Sum(p => p.Value.Points);
+            double totalPoints = studentAssignmentPoints.Points.Sum(p => p.Value.Points);
             double roundedPoints = Math.Round(totalPoints, 2);
 
             IRowComponent row = Row(
-                    Label(student.UniversityId),
-                    Label(student.FullName),
-                    Label(student.GroupName),
-                    Label(studentPoints.GithubUserName ?? string.Empty),
+                    Label(student.Value.UniversityId),
+                    Label(student.Value.FullName),
+                    Label(student.Value.GroupName),
+                    Label(student.GithubUserName ?? string.Empty),
                     ForEach(
                         model.Assignments,
-                        a => BuildAssignmentPointsCell(a.Value, studentPoints.Points, currentCulture)),
+                        a => BuildAssignmentPointsCell(a.Value, studentAssignmentPoints.Points, currentCulture)),
                     Label(roundedPoints, currentCulture).WithTrailingMediumBorder())
                 .WithDefaultStyle(i, model.Students.Count)
                 .WithGroupSeparators(i, model);

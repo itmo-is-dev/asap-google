@@ -43,10 +43,10 @@ internal static class RowComponentExtensions
         if (rowNumber is 0)
             return row;
 
-        SubjectCoursePoints.StudentPoints student1 = points.Students[rowNumber];
-        SubjectCoursePoints.StudentPoints student2 = points.Students[rowNumber - 1];
+        SubjectCoursePoints.Student student1 = points.Students[rowNumber];
+        SubjectCoursePoints.Student student2 = points.Students[rowNumber - 1];
 
-        if (student1.Student.GroupName != student2.Student.GroupName)
+        if (student1.Value.GroupName != student2.Value.GroupName)
             row = row.WithTopMediumBorder();
 
         return row;
