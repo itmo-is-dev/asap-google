@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Dto\Itmo.Dev.Asap.Google.Application.Dto.csproj" />
+      <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Models\Itmo.Dev.Asap.Google.Application.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,7 +18,7 @@
         <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Services" />
         <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Grpc" />
         <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Presentation.Kafka" />
-        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Application.Handlers" />
+        <InternalsVisibleTo Include="Itmo.Dev.Asap.Google.Application" />
     </ItemGroup>
 
 </Project>

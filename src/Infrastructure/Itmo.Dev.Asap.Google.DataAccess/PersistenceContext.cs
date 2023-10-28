@@ -1,5 +1,5 @@
-using Itmo.Dev.Asap.Google.Application.DataAccess;
-using Itmo.Dev.Asap.Google.Application.DataAccess.Repositories;
+using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess;
+using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess.Repositories;
 using Itmo.Dev.Platform.Postgres.UnitOfWork;
 using System.Data;
 
