@@ -1,10 +1,13 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.GoogleSheets.Extensions;
-using Itmo.Dev.Asap.Google.Application.Abstractions;
-using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
-using Itmo.Dev.Asap.Google.Application.Dto.Submissions;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Enrichment;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Tables;
+using Itmo.Dev.Asap.Google.Application.Enrichment;
+using Itmo.Dev.Asap.Google.Application.Models.Tables.Points;
+using Itmo.Dev.Asap.Google.Application.Models.Tables.Queues;
+using Itmo.Dev.Asap.Google.Application.Points;
 using Itmo.Dev.Asap.Google.Application.Providers;
-using Itmo.Dev.Asap.Google.Application.TableWriters;
+using Itmo.Dev.Asap.Google.Application.Queues;
 using Itmo.Dev.Asap.Google.Common.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,14 +18,18 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddGoogleApplication(this IServiceCollection collection)
     {
         collection
-            .AddSingleton<ITableWriter<SubjectCoursePointsDto>, LabsTableWriter>()
-            .AddSingleton<ITableWriter<SubmissionsQueueDto>, QueueTableWriter>();
+            .AddSingleton<ITableWriter<SubjectCoursePoints>, PointsTableWriter>()
+            .AddSingleton<ITableWriter<SubmissionQueue>, QueueTableWriter>();
 
         collection
             .AddFluentSpreadsheets()
             .AddGoogleSheets();
 
         collection.AddSingleton<ICultureInfoProvider, RuCultureInfoProvider>();
+
+        collection.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<IAssemblyMarker>());
+
+        collection.AddScoped<IGoogleSubjectCourseEnricher, GoogleSubjectCourseEnricher>();
 
         return collection;
     }

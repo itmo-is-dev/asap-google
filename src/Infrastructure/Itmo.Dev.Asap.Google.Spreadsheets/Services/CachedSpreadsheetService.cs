@@ -1,5 +1,5 @@
-using Itmo.Dev.Asap.Google.Application.Spreadsheets.Models;
-using Itmo.Dev.Asap.Google.Application.Spreadsheets.Services;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Spreadsheets.Models;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Spreadsheets.Services;
 using Itmo.Dev.Asap.Google.Common.Tools;
 using Microsoft.Extensions.Caching.Memory;
 

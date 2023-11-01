@@ -4,7 +4,6 @@
         <PackageReference Include="Itmo.Dev.Platform.Kafka" />
         <PackageReference Include="Grpc.Tools" />
         <PackageReference Include="MediatR" />
-        <PackageReference Include="Riok.Mapperly" />
     </ItemGroup>
     
     <ItemGroup>
@@ -12,8 +11,9 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.Github\Itmo.Dev.Asap.Google.Application.Github.csproj" />
+      <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions.csproj" />
       <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Contracts\Itmo.Dev.Asap.Google.Application.Contracts.csproj" />
+      <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
     </ItemGroup>
 
 </Project>

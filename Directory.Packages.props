@@ -18,7 +18,6 @@
     <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.45" />
     <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.45" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
     <PackageVersion Include="System.Runtime.Caching" Version="7.0.0" />
   </ItemGroup>
@@ -127,7 +126,6 @@
     <PackageVersion Include="Octokit.Webhooks.AspNetCore" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="RichEntity" Version="1.1.2" />
     <PackageVersion Include="ronimizy.FluentSerialization.Extensions.NewtonsoftJson" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>

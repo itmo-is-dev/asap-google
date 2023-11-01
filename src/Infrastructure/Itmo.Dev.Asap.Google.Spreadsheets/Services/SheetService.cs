@@ -1,8 +1,8 @@
 using FluentSpreadsheets.GoogleSheets.Models;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
-using Itmo.Dev.Asap.Google.Application.Spreadsheets.Models;
-using Itmo.Dev.Asap.Google.Application.Spreadsheets.Services;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Spreadsheets.Models;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Spreadsheets.Services;
 using Itmo.Dev.Asap.Google.Spreadsheets.Extensions;
 using Itmo.Dev.Asap.Google.Spreadsheets.Tools;
 using Microsoft.Extensions.Logging;

@@ -7,18 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.Spreadsheets\Itmo.Dev.Asap.Google.Application.Spreadsheets.csproj" />
-      <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
+        <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions.csproj" />
+        <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentSpreadsheets.GoogleSheets" />
-      <PackageReference Include="Google.Apis.Drive.v3" />
-      <PackageReference Include="Google.Apis.Sheets.v4" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-      <PackageReference Include="Scrutor" />
+        <PackageReference Include="FluentSpreadsheets.GoogleSheets"/>
+        <PackageReference Include="Google.Apis.Drive.v3"/>
+        <PackageReference Include="Google.Apis.Sheets.v4"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Scrutor"/>
     </ItemGroup>
 
 </Project>

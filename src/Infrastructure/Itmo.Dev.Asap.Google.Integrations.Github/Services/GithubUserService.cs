@@ -1,7 +1,7 @@
 using Itmo.Dev.Asap.Github.Models;
 using Itmo.Dev.Asap.Github.Users;
-using Itmo.Dev.Asap.Google.Application.Github.Models;
-using Itmo.Dev.Asap.Google.Application.Github.Services;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Github.Models;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Github.Services;
 using Itmo.Dev.Asap.Google.Integrations.Github.Mapping;
 using System.Runtime.CompilerServices;
 
@@ -16,7 +16,7 @@ public class GithubUserService : IGithubUserService
         _client = client;
     }
 
-    public async IAsyncEnumerable<GithubUserDto> FindByIdsAsync(
+    public async IAsyncEnumerable<GithubUserModel> FindByIdsAsync(
         IEnumerable<string> userIds,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
@@ -25,7 +25,7 @@ public class GithubUserService : IGithubUserService
 
         foreach (GithubUser user in response.Users)
         {
-            yield return user.ToDto();
+            yield return user.MapToGithubUserModel();
         }
     }
 }

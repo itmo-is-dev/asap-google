@@ -1,4 +1,4 @@
-using Itmo.Dev.Asap.Google.Application.Github.Services;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Github.Services;
 using Itmo.Dev.Asap.Google.Integrations.Github.Services;
 using Itmo.Dev.Asap.Google.Integrations.Github.Tools;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,4 @@
-using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
+using Itmo.Dev.Asap.Google.Application.Models.SubjectCourses;
 using MediatR;
 
 namespace Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses;

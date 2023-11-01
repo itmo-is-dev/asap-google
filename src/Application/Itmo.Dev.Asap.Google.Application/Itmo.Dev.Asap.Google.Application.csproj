@@ -7,17 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions.csproj" />
       <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Contracts\Itmo.Dev.Asap.Google.Application.Contracts.csproj" />
-      <ProjectReference Include="..\Abstractions\Itmo.Dev.Asap.Google.Application.DataAccess\Itmo.Dev.Asap.Google.Application.DataAccess.csproj" />
-      <ProjectReference Include="..\Abstractions\Itmo.Dev.Asap.Google.Application.Spreadsheets\Itmo.Dev.Asap.Google.Application.Spreadsheets.csproj" />
       <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FluentSpreadsheets.GoogleSheets" />
+      <PackageReference Include="MediatR" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+      <PackageReference Include="System.Linq.Async" />
     </ItemGroup>
 
 </Project>
