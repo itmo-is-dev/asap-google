@@ -18,7 +18,6 @@
     <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.45" />
     <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.45" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
     <PackageVersion Include="System.Runtime.Caching" Version="7.0.0" />
   </ItemGroup>
@@ -54,7 +53,8 @@
     <PackageVersion Include="FluentChaining" Version="1.0.4" />
     <PackageVersion Include="FluentScanning" Version="2.0.1" />
     <PackageVersion Include="FluentScanning.DependencyInjection" Version="2.0.1" />
-    <PackageVersion Include="FluentSpreadsheets.GoogleSheets" Version="1.6.4" />
+    <PackageVersion Include="FluentSpreadsheets" Version="1.6.5" />
+    <PackageVersion Include="FluentSpreadsheets.GoogleSheets" Version="1.6.5" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="GitHubJwt" Version="0.0.5" />
@@ -126,7 +126,6 @@
     <PackageVersion Include="Octokit.Webhooks.AspNetCore" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="RichEntity" Version="1.1.2" />
     <PackageVersion Include="ronimizy.FluentSerialization.Extensions.NewtonsoftJson" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>

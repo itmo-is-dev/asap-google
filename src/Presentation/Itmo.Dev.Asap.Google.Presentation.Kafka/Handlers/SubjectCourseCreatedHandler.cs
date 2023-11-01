@@ -1,5 +1,4 @@
-using Itmo.Dev.Asap.Google.Application.Dto.SubjectCourses;
-using Itmo.Dev.Asap.Google.Presentation.Kafka.Mappers;
+using Itmo.Dev.Asap.Google.Common;
 using Itmo.Dev.Asap.Kafka;
 using Itmo.Dev.Platform.Kafka.Consumer;
 using Itmo.Dev.Platform.Kafka.Consumer.Models;
@@ -22,11 +21,14 @@ public class SubjectCourseCreatedHandler : IKafkaMessageHandler<SubjectCourseCre
         IEnumerable<ConsumerKafkaMessage<SubjectCourseCreatedKey, SubjectCourseCreatedValue>> messages,
         CancellationToken cancellationToken)
     {
-        IEnumerable<SubjectCourseDto> subjectCourses = messages
+        IEnumerable<SubjectCourse> subjectCourses = messages
             .GetLatestByKey()
-            .Select(x => x.Value.SubjectCourse.MapTo());
+            .Select(x => Map(x.Value.SubjectCourse));
 
         var notification = new Notification(subjectCourses);
         await _mediator.Publish(notification, cancellationToken);
     }
+
+    private static SubjectCourse Map(SubjectCourseCreatedValue.Types.SubjectCourse subjectCourse)
+        => new SubjectCourse(subjectCourse.Id.ToGuid(), subjectCourse.Title);
 }

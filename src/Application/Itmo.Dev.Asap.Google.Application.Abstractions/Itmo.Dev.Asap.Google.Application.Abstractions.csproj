@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\Itmo.Dev.Asap.Google.Application.Models\Itmo.Dev.Asap.Google.Application.Models.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="SourceKit.Generators.Builder"/>
+    </ItemGroup>
+
+</Project>

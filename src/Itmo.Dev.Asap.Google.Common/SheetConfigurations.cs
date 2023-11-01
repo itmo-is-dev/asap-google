@@ -7,9 +7,4 @@ public static class SheetConfigurations
         public const int Id = 0;
         public const string Title = "Лабораторные";
     }
-
-    public static class Points
-    {
-        public const string Title = "Баллы";
-    }
 }

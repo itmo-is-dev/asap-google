@@ -1,12 +1,31 @@
 using Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses;
-using Riok.Mapperly.Abstractions;
+using Itmo.Dev.Asap.Google.Application.Models.SubjectCourses;
+using Itmo.Dev.Asap.Google.Common;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Grpc.Mapping;
 
-[Mapper]
-internal static partial class GoogleSubjectCourseServiceMapper
+internal static class GoogleSubjectCourseServiceMapper
 {
-    public static partial FindSubjectCoursesById.Query MapToApplicationRequest(this FindByIdsRequest request);
+    public static FindSubjectCoursesById.Query MapToApplicationRequest(this FindByIdsRequest request)
+    {
+        return new FindSubjectCoursesById.Query(request.Ids.Select(x => x.ToGuid()));
+    }
 
-    public static partial FindByIdsResponse MapToGrpcResponse(this FindSubjectCoursesById.Response response);
+    public static FindByIdsResponse MapToGrpcResponse(this FindSubjectCoursesById.Response response)
+    {
+        return new FindByIdsResponse
+        {
+            SubjectCourses = { response.SubjectCourses.Select(Map) },
+        };
+    }
+
+    private static GoogleSubjectCourse Map(GoogleSubjectCourseDto subjectCourse)
+    {
+        return new GoogleSubjectCourse
+        {
+            Id = subjectCourse.Id.ToString(),
+            SpreadsheetId = subjectCourse.SpreadsheetId,
+            SpreadsheetName = subjectCourse.SpreadsheetName,
+        };
+    }
 }

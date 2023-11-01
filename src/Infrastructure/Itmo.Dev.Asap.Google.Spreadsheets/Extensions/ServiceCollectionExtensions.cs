@@ -2,7 +2,7 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
-using Itmo.Dev.Asap.Google.Application.Spreadsheets.Services;
+using Itmo.Dev.Asap.Google.Application.Abstractions.Spreadsheets.Services;
 using Itmo.Dev.Asap.Google.Spreadsheets.Services;
 using Itmo.Dev.Asap.Google.Spreadsheets.Tools;
 using Microsoft.Extensions.DependencyInjection;

@@ -6,15 +6,15 @@
         <PackageReference Include="Grpc.Net.Client"/>
         <PackageReference Include="Grpc.Tools"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-        <PackageReference Include="Riok.Mapperly"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\Application\Abstractions\Itmo.Dev.Asap.Google.Application.Github\Itmo.Dev.Asap.Google.Application.Github.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <Protobuf ProtoRoot="protos" Include="protos\**\*.proto" GrpcServices="Client"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Itmo.Dev.Asap.Google.Application.Abstractions\Itmo.Dev.Asap.Google.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\..\Itmo.Dev.Asap.Google.Common\Itmo.Dev.Asap.Google.Common.csproj" />
     </ItemGroup>
 
 

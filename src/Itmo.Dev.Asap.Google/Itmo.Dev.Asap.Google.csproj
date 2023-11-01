@@ -16,8 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application.Enrichment\Itmo.Dev.Asap.Google.Application.Enrichment.csproj" />
-        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application.Handlers\Itmo.Dev.Asap.Google.Application.Handlers.csproj" />
         <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application\Itmo.Dev.Asap.Google.Application.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Caching\Itmo.Dev.Asap.Google.Caching.csproj" />
         <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.DataAccess\Itmo.Dev.Asap.Google.DataAccess.csproj" />

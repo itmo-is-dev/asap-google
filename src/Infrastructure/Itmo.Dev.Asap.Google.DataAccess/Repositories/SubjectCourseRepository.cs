@@ -1,6 +1,6 @@
-using Itmo.Dev.Asap.Google.Application.DataAccess.Queries;
-using Itmo.Dev.Asap.Google.Application.DataAccess.Repositories;
-using Itmo.Dev.Asap.Google.Domain.SubjectCourses;
+using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess.Queries;
+using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess.Repositories;
+using Itmo.Dev.Asap.Google.Application.Models.SubjectCourses;
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
 using Itmo.Dev.Platform.Postgres.UnitOfWork;
