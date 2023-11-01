@@ -9,7 +9,7 @@ using static FluentSpreadsheets.ComponentFactory;
 
 namespace Itmo.Dev.Asap.Google.Application.Queues;
 
-public class QueueTable : RowTable<Queue>
+public class QueueTable : RowTable<SubmissionQueue>
 {
     private static readonly IRowComponent Header = Row(
         Label("ФИО").WithColumnWidth(2).WithFrozenRows(),
@@ -32,7 +32,7 @@ public class QueueTable : RowTable<Queue>
         return component.WithDefaultStyle();
     }
 
-    protected override IEnumerable<IRowComponent> RenderRows(Queue model)
+    protected override IEnumerable<IRowComponent> RenderRows(SubmissionQueue model)
     {
         yield return Header;
 

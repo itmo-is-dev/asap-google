@@ -43,7 +43,7 @@ public class QueueUpdatedHandler : IKafkaMessageHandler<QueueUpdatedKey, QueueUp
             .Select(Map)
             .ToArray();
 
-        var queue = new Queue(value.StudentGroupName, students, submissions);
+        var queue = new SubmissionQueue(value.StudentGroupName, students, submissions);
 
         return new Notification(value.SubjectCourseId.ToGuid(), value.StudentGroupId.ToGuid(), queue);
     }

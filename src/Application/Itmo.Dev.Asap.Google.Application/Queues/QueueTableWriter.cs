@@ -9,7 +9,7 @@ using Itmo.Dev.Asap.Google.Common.Tools;
 
 namespace Itmo.Dev.Asap.Google.Application.Queues;
 
-public class QueueTableWriter : ITableWriter<Queue>
+public class QueueTableWriter : ITableWriter<SubmissionQueue>
 {
     private readonly IGoogleSheetsComponentRenderer _renderer;
     private readonly ISheetService _sheetService;
@@ -25,7 +25,7 @@ public class QueueTableWriter : ITableWriter<Queue>
         _cultureInfoProvider = cultureInfoProvider;
     }
 
-    public async Task UpdateAsync(string spreadsheetId, Queue model, CancellationToken cancellationToken)
+    public async Task UpdateAsync(string spreadsheetId, SubmissionQueue model, CancellationToken cancellationToken)
     {
         string title = model.Title;
 

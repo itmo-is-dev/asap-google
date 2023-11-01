@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
     {
         collection
             .AddSingleton<ITableWriter<SubjectCoursePoints>, PointsTableWriter>()
-            .AddSingleton<ITableWriter<Queue>, QueueTableWriter>();
+            .AddSingleton<ITableWriter<SubmissionQueue>, QueueTableWriter>();
 
         collection
             .AddFluentSpreadsheets()
