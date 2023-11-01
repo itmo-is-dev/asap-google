@@ -132,6 +132,7 @@ public class SheetService : ISheetService
         {
             UpdateDimensionProperties = new UpdateDimensionPropertiesRequest
             {
+                Fields = "range.dimensions,range.startIndex,properties.pixelSize",
                 Range = new DimensionRange
                 {
                     Dimension = Dimension.Columns,
