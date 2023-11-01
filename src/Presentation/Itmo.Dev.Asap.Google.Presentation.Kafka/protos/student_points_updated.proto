@@ -1,0 +1,19 @@
+syntax = "proto3";
+option csharp_namespace = "Itmo.Dev.Asap.Kafka";
+
+package itmo.dev.asap.kafka;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message StudentPointsUpdatedKey {
+  string subject_course_id = 1;
+}
+
+message StudentPointsUpdatedValue {
+  string student_id = 1;
+  string assignment_id = 2;
+  google.protobuf.Timestamp date = 3;
+  bool is_banned = 4;
+  google.protobuf.DoubleValue points = 5;
+}
