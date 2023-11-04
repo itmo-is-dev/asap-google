@@ -1,5 +1,6 @@
 using FluentSpreadsheets;
 using FluentSpreadsheets.Styles;
+using FluentSpreadsheets.Wrappables;
 using Itmo.Dev.Asap.Google.Application.Models.Tables.Points;
 using System.Drawing;
 
@@ -52,7 +53,7 @@ internal static class RowComponentExtensions
         return row;
     }
 
-    private static IRowComponent WithAlternatingColor(this IRowComponent row, int rowNumber)
+    public static T WithAlternatingColor<T>(this T row, int rowNumber) where T : IWrappable<T>
     {
         return (rowNumber % 2) switch
         {

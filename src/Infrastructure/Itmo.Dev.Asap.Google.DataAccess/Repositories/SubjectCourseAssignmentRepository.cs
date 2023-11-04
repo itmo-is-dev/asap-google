@@ -28,7 +28,7 @@ internal class SubjectCourseAssignmentRepository : ISubjectCourseAssignmentRepos
         select subject_course_id, assignment_id, subject_course_assignment_ordinal
         from subject_course_assignments
         where 
-            (cardinality(:subject_course_ids) = 0 or subject_course_id = any(:subject_course_id))
+            (cardinality(:subject_course_ids) = 0 or subject_course_id = any(:subject_course_ids))
             and (cardinality(:assignment_ids) = 0 or assignment_id = any(:assignment_ids));
         """;
 

@@ -2,6 +2,7 @@ using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess.Repositories;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Tables;
 using Itmo.Dev.Asap.Google.Application.Models.SubjectCourses;
 using Itmo.Dev.Asap.Google.Application.Models.Tables.Queues;
+using Itmo.Dev.Asap.Google.Application.SubjectCourses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using static Itmo.Dev.Asap.Google.Application.Contracts.Queues.Notifications.QueueUpdated;

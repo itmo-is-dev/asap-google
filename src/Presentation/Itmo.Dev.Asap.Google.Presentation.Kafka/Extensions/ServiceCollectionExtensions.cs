@@ -13,9 +13,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection collection,
         IConfiguration configuration)
     {
-        const string queueUpdatedSectionKey = "Presentation:Kafka:Consumers:QueueUpdated";
-        const string subjectCourseCreatedSectionKey = "Presentation:Kafka:Consumers:SubjectCourseCreated";
-        const string subjectCoursePointsUpdatedSectionKey = "Presentation:Kafka:Consumers:SubjectCoursePointsUpdated";
+        const string keyPath = "Presentation:Kafka:Consumers";
 
         string host = configuration.GetSection("Presentation:Kafka:Host").Get<string>() ?? string.Empty;
         string group = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
@@ -26,7 +24,7 @@ public static class ServiceCollectionExtensions
             .DeserializeValueWithProto()
             .UseNamedOptionsConfiguration(
                 "QueueUpdated",
-                configuration.GetSection(queueUpdatedSectionKey),
+                configuration.GetSection($"{keyPath}:QueueUpdated"),
                 c => c.WithHost(host).WithGroup(group)));
 
         collection.AddKafkaConsumer<SubjectCourseCreatedKey, SubjectCourseCreatedValue>(builder => builder
@@ -35,7 +33,7 @@ public static class ServiceCollectionExtensions
             .DeserializeValueWithProto()
             .UseNamedOptionsConfiguration(
                 "SubjectCourseCreated",
-                configuration.GetSection(subjectCourseCreatedSectionKey),
+                configuration.GetSection($"{keyPath}:SubjectCourseCreated"),
                 c => c.WithHost(host).WithGroup(group)));
 
         collection.AddKafkaConsumer<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>(builder => builder
@@ -44,7 +42,16 @@ public static class ServiceCollectionExtensions
             .DeserializeValueWithProto()
             .UseNamedOptionsConfiguration(
                 "SubjectCoursePointsUpdated",
-                configuration.GetSection(subjectCoursePointsUpdatedSectionKey),
+                configuration.GetSection($"{keyPath}:SubjectCoursePointsUpdated"),
+                c => c.WithHost(host).WithGroup(group)));
+
+        collection.AddKafkaConsumer<StudentPointsUpdatedKey, StudentPointsUpdatedValue>(builder => builder
+            .HandleWith<StudentPointsUpdatedHandler>()
+            .DeserializeKeyWithProto()
+            .DeserializeValueWithProto()
+            .UseNamedOptionsConfiguration(
+                "StudentPointsUpdated",
+                configuration.GetSection($"{keyPath}:StudentPointsUpdated"),
                 c => c.WithHost(host).WithGroup(group)));
 
         return collection;

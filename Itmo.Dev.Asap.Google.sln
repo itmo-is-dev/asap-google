@@ -47,6 +47,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Cachin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Application.Models", "src\Application\Itmo.Dev.Asap.Google.Application.Models\Itmo.Dev.Asap.Google.Application.Models.csproj", "{E61A942F-D040-4E28-8CCA-07C06A2A4676}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{95DD4F25-63F1-48E7-914B-4806FE3923D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itmo.Dev.Asap.Google.Application.Tests", "tests\Itmo.Dev.Asap.Google.Application.Tests\Itmo.Dev.Asap.Google.Application.Tests.csproj", "{352D6873-B410-45F5-A805-E767D7ACB084}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F994F5BA-C2AC-4BA6-87FC-30FBC822D62C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\deploy.yml = .github\workflows\deploy.yml
+		.github\workflows\purge-allure-history.yml = .github\workflows\purge-allure-history.yml
+		.github\workflows\dotnet-build.yml = .github\workflows\dotnet-build.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +80,8 @@ Global
 		{8FAAF1F8-C891-46CB-AE54-B79070E9A5AE} = {33029BA9-E5ED-4B29-A1ED-96C4E168A1B3}
 		{FD8DC15F-3553-49D2-94C2-5399B7AEF0BE} = {CAF2ED06-323D-4F75-BE50-A923BEA7E8A5}
 		{E61A942F-D040-4E28-8CCA-07C06A2A4676} = {CAF2ED06-323D-4F75-BE50-A923BEA7E8A5}
+		{352D6873-B410-45F5-A805-E767D7ACB084} = {95DD4F25-63F1-48E7-914B-4806FE3923D1}
+		{F994F5BA-C2AC-4BA6-87FC-30FBC822D62C} = {A8A73DBC-4726-4B5C-A840-F7B3A6937F36}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{685F3641-6C03-4A30-9359-51B1A816D49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -119,5 +132,9 @@ Global
 		{E61A942F-D040-4E28-8CCA-07C06A2A4676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E61A942F-D040-4E28-8CCA-07C06A2A4676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E61A942F-D040-4E28-8CCA-07C06A2A4676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352D6873-B410-45F5-A805-E767D7ACB084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352D6873-B410-45F5-A805-E767D7ACB084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352D6873-B410-45F5-A805-E767D7ACB084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352D6873-B410-45F5-A805-E767D7ACB084}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
