@@ -32,14 +32,6 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
             Enumerable.Range(0, model.AssignmentCount),
             _ => VStack(Empty(), HStack(Empty(), Empty())));
 
-        IRowComponent emptyRow = Row(
-            Empty(),
-            Empty(),
-            Empty(),
-            Empty(),
-            emptyAssignmentsForEach,
-            Empty());
-
         yield return Row(
             Empty(),
             Empty(),
@@ -49,6 +41,14 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
             Empty());
 
         int ordinal = 0;
+
+        IRowComponent emptyRow = Row(
+            Empty(),
+            Empty(),
+            Empty(),
+            Empty(),
+            ForEach(Enumerable.Range(0, model.AssignmentCount), _ => HStack(Empty(), Empty())),
+            Empty());
 
         foreach (PartialStudentAssignmentPoints studentPoints in model.StudentPoints.OrderBy(x => x.StudentOrdinal))
         {
@@ -76,7 +76,7 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
         {
             while (ordinal < point.AssignmentOrdinal)
             {
-                yield return Empty();
+                yield return HStack(Empty(), Empty());
                 ordinal++;
             }
 

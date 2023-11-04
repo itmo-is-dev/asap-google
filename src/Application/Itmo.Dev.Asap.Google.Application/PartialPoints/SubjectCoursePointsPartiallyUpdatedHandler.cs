@@ -41,6 +41,11 @@ internal class SubjectCoursePointsPartiallyUpdatedHandler : INotificationHandler
             return;
         }
 
+        _logger.LogInformation(
+            "Updating partial points for subject course = {SubjectCourseId}, count = {Count}",
+            notification.SubjectCourseId,
+            notification.Points.Count);
+
         var assignmentQuery = SubjectCourseAssignmentsQuery.Build(builder => builder
             .WithAssignmentIds(notification.Points.Select(x => x.AssignmentId)));
 
