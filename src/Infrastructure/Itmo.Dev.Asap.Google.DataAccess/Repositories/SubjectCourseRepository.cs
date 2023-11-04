@@ -57,7 +57,7 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
         const string sql = """
         select subject_course_id,
                subject_course_spreadsheet_id,
-               (select count(*) from subject_courses ss where ss.subject_course_id = s.subject_course_id) as assignment_count
+               (select count(*) from subject_course_assignments a where a.subject_course_id = s.subject_course_id) as assignment_count
         from subject_courses s
         where 
             (cardinality(:ids) = 0 or subject_course_id = any(:ids))

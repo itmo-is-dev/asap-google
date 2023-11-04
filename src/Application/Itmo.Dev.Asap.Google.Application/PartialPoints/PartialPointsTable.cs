@@ -77,6 +77,7 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
             while (ordinal < point.AssignmentOrdinal)
             {
                 yield return Empty();
+                ordinal++;
             }
 
             CultureInfo formatProvider = _cultureInfoProvider.GetCultureInfo();
