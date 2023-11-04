@@ -3,6 +3,7 @@ using Itmo.Dev.Asap.Google.Common;
 using Itmo.Dev.Asap.Kafka;
 using Itmo.Dev.Platform.Kafka.Consumer;
 using Itmo.Dev.Platform.Kafka.Consumer.Models;
+using Itmo.Dev.Platform.Kafka.Extensions;
 using MediatR;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Kafka.Handlers;
@@ -34,18 +35,13 @@ public class StudentPointsUpdatedHandler
         string subjectCourseId,
         IEnumerable<ConsumerKafkaMessage<StudentPointsUpdatedKey, StudentPointsUpdatedValue>> messages)
     {
-        IEnumerable<StudentPointsUpdatedValue> values = messages.Select(x => x.Value);
-        SubjectCoursePointsPartiallyUpdated.StudentPoints[] points = Map(GetLatest(values)).ToArray();
+        IEnumerable<StudentPointsUpdatedValue> latestValues = messages
+            .GetLatestBy(message => (message.Value.StudentId, message.Value.AssignmentId))
+            .Select(message => message.Value);
+
+        SubjectCoursePointsPartiallyUpdated.StudentPoints[] points = Map(latestValues).ToArray();
 
         return new SubjectCoursePointsPartiallyUpdated.Notification(subjectCourseId.ToGuid(), points);
-    }
-
-    private static IEnumerable<StudentPointsUpdatedValue> GetLatest(
-        IEnumerable<StudentPointsUpdatedValue> values)
-    {
-        return values.GroupBy(
-            x => (x.StudentId, x.AssignmentId),
-            (_, g) => g.OrderByDescending(x => x.Date).First());
     }
 
     private static IEnumerable<SubjectCoursePointsPartiallyUpdated.StudentPoints> Map(
