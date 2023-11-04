@@ -10,8 +10,11 @@ namespace Itmo.Dev.Asap.Google.Application.Tests.PartialPoints;
 
 public class PartialPointsTableTests
 {
-    [Fact]
-    public void Render_ShouldReturnValidComponent()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void Render_ShouldReturnValidComponent(int assignmentOrdinal)
     {
         // Arrange
         var points = new PartialSubjectCoursePoints(
@@ -23,7 +26,7 @@ public class PartialPointsTableTests
                     new[]
                     {
                         new PartialAssignmentPoints(
-                            2,
+                            assignmentOrdinal,
                             new AssignmentPoints(Guid.Empty, DateOnly.MinValue, false, 0d)),
                     }),
             });
