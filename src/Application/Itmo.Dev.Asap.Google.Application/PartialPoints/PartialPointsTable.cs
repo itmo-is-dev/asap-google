@@ -59,7 +59,10 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
             }
 
             IEnumerable<IComponent> components = EmptyStudentPrefix
-                .Concat(GetAssignmentPointsComponents(studentPoints.StudentOrdinal, studentPoints.Points))
+                .Concat(GetAssignmentPointsComponents(
+                    studentPoints.StudentOrdinal,
+                    model.AssignmentCount,
+                    studentPoints.Points))
                 .Append(Empty());
 
             yield return Row(components);
@@ -68,6 +71,7 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
 
     private IEnumerable<IComponent> GetAssignmentPointsComponents(
         int studentOrdinal,
+        int assignmentCount,
         IEnumerable<PartialAssignmentPoints> points)
     {
         int ordinal = 0;
@@ -91,6 +95,13 @@ public class PartialPointsTable : RowTable<PartialSubjectCoursePoints>
                 : stack.WithAlternatingColor(studentOrdinal);
 
             yield return stack;
+            ordinal++;
+        }
+
+        while (ordinal < assignmentCount)
+        {
+            yield return HStack(Empty(), Empty());
+            ordinal++;
         }
     }
 }
