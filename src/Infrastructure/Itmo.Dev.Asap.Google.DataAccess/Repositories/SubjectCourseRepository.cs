@@ -20,36 +20,6 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<GoogleSubjectCourse?> FindByIdAsync(Guid id, CancellationToken cancellationToken)
-    {
-        const string sql = """
-        select subject_course_id, 
-               subject_course_spreadsheet_id,
-               (select count(*) from subject_courses ss where ss.subject_course_id = s.subject_course_id) as assignment_count
-        from subject_courses s
-        where subject_course_id = :id
-        """;
-
-        NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(cancellationToken);
-
-        await using NpgsqlCommand command = new NpgsqlCommand(sql, connection)
-            .AddParameter("id", id);
-
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
-
-        int idOrdinal = reader.GetOrdinal("subject_course_id");
-        int spreadsheetIdOrdinal = reader.GetOrdinal("subject_course_spreadsheet_id");
-        int assignmentCountOrdinal = reader.GetOrdinal("assignment_count");
-
-        if (await reader.ReadAsync(cancellationToken) is false)
-            return null;
-
-        return new GoogleSubjectCourse(
-            Id: reader.GetGuid(idOrdinal),
-            SpreadsheetId: reader.GetString(spreadsheetIdOrdinal),
-            AssignmentCount: reader.GetInt32(assignmentCountOrdinal));
-    }
-
     public async IAsyncEnumerable<GoogleSubjectCourse> QueryAsync(
         SubjectCourseQuery query,
         [EnumeratorCancellation] CancellationToken cancellationToken)

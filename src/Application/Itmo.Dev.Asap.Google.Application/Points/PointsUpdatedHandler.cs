@@ -2,6 +2,7 @@ using Itmo.Dev.Asap.Google.Application.Abstractions.DataAccess;
 using Itmo.Dev.Asap.Google.Application.Abstractions.Tables;
 using Itmo.Dev.Asap.Google.Application.Models.SubjectCourses;
 using Itmo.Dev.Asap.Google.Application.Models.Tables.Points;
+using Itmo.Dev.Asap.Google.Application.SubjectCourses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using static Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.Notifications.SubjectCoursePointsUpdated;
