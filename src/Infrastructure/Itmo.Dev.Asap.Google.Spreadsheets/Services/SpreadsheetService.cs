@@ -18,8 +18,8 @@ public class SpreadsheetService : ISpreadsheetService
 {
     private const string SpreadsheetType = "application/vnd.google-apps.spreadsheet";
 
-    private const int DefaultSheetId = SheetConfigurations.Labs.Id;
-    private const string DefaultSheetTitle = SheetConfigurations.Labs.Title;
+    private const int DefaultSheetId = SheetConfigurations.Points.Id;
+    private const string DefaultSheetTitle = SheetConfigurations.Points.Title;
 
     private const string UpdateTitle = "title";
 

@@ -23,7 +23,10 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
     public async Task<GoogleSubjectCourse?> FindByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         const string sql = """
-        select subject_course_id, subject_course_spreadsheet_id from subject_courses
+        select subject_course_id, 
+               subject_course_spreadsheet_id,
+               (select count(*) from subject_courses ss where ss.subject_course_id = s.subject_course_id) as assignment_count
+        from subject_courses s
         where subject_course_id = :id
         """;
 
@@ -36,11 +39,15 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
 
         int idOrdinal = reader.GetOrdinal("subject_course_id");
         int spreadsheetIdOrdinal = reader.GetOrdinal("subject_course_spreadsheet_id");
+        int assignmentCountOrdinal = reader.GetOrdinal("assignment_count");
 
         if (await reader.ReadAsync(cancellationToken) is false)
             return null;
 
-        return new GoogleSubjectCourse(reader.GetGuid(idOrdinal), reader.GetString(spreadsheetIdOrdinal));
+        return new GoogleSubjectCourse(
+            Id: reader.GetGuid(idOrdinal),
+            SpreadsheetId: reader.GetString(spreadsheetIdOrdinal),
+            AssignmentCount: reader.GetInt32(assignmentCountOrdinal));
     }
 
     public async IAsyncEnumerable<GoogleSubjectCourse> QueryAsync(
@@ -48,7 +55,10 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         const string sql = """
-        select subject_course_id, subject_course_spreadsheet_id from subject_courses
+        select subject_course_id,
+               subject_course_spreadsheet_id,
+               (select count(*) from subject_courses ss where ss.subject_course_id = s.subject_course_id) as assignment_count
+        from subject_courses s
         where 
             (cardinality(:ids) = 0 or subject_course_id = any(:ids))
             and (cardinality(:spreadsheet_ids) = 0 or subject_course_spreadsheet_id = any(:spreadsheet_ids))
@@ -64,12 +74,14 @@ internal class SubjectCourseRepository : ISubjectCourseRepository
 
         int id = reader.GetOrdinal("subject_course_id");
         int spreadsheetId = reader.GetOrdinal("subject_course_spreadsheet_id");
+        int assignmentCount = reader.GetOrdinal("assignment_count");
 
         while (await reader.ReadAsync(cancellationToken))
         {
             yield return new GoogleSubjectCourse(
-                reader.GetGuid(id),
-                reader.GetString(spreadsheetId));
+                Id: reader.GetGuid(id),
+                SpreadsheetId: reader.GetString(spreadsheetId),
+                AssignmentCount: reader.GetInt32(assignmentCount));
         }
     }
 

@@ -27,7 +27,7 @@ internal class SubjectCourseCreatedHandler : INotificationHandler<Notification>
             SpreadsheetCreateResult result = await _spreadsheetService
                 .CreateSpreadsheetAsync(dto.Title, cancellationToken);
 
-            var subjectCourse = new GoogleSubjectCourse(dto.Id, result.SpreadsheetId);
+            var subjectCourse = new GoogleSubjectCourse(dto.Id, result.SpreadsheetId, AssignmentCount: 0);
             _context.SubjectCourses.Add(subjectCourse, cancellationToken);
         }
 

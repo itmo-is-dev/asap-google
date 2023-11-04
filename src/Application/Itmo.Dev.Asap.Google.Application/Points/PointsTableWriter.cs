@@ -12,7 +12,7 @@ namespace Itmo.Dev.Asap.Google.Application.Points;
 
 public class PointsTableWriter : ITableWriter<SubjectCoursePoints>
 {
-    private const string Title = SheetConfigurations.Labs.Title;
+    private const string Title = SheetConfigurations.Points.Title;
 
     private readonly IGoogleSheetsComponentRenderer _renderer;
     private readonly ISheetService _sheetService;
