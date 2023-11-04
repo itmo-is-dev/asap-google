@@ -13,11 +13,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="1.0.45" />
-    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.0.45" />
+    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="1.0.52" />
+    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.0.52" />
     <PackageVersion Include="Itmo.Dev.Platform.Testing" Version="1.0.52" />
-    <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.45" />
-    <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.45" />
+    <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.52" />
+    <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.52" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
     <PackageVersion Include="System.Runtime.Caching" Version="7.0.0" />
