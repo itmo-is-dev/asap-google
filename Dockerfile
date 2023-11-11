@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:8.0.100-rc.2 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:7.0.403 AS build
 WORKDIR /source
 COPY ./src ./src
 COPY ./*.sln .
