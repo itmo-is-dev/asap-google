@@ -56,8 +56,6 @@ public class PointsTable : RowTable<SubjectCoursePoints>
             PointsStudent student = model.Students[i];
             StudentAssignmentPoints studentAssignmentPoints = model.StudentPoints[student.Id];
 
-            double totalPoints = studentAssignmentPoints.Points.Sum(p => p.Value.Points);
-            double roundedPoints = Math.Round(totalPoints, 2);
             var pointLabels = new List<IComponentIndexLabel>(model.Assignments.Count);
 
             IRowComponent row = Row(
