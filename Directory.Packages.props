@@ -34,7 +34,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="7.0.1" />
     <PackageVersion Include="Npgsql" Version="7.0.6" />
     <PackageVersion Include="Respawn" Version="6.0.0" />
-    <PackageVersion Include="SourceKit.Generators.Builder" Version="1.1.18" />
+    <PackageVersion Include="SourceKit.Generators.Builder" Version="1.1.21" />
     <PackageVersion Include="Testcontainers.PostgreSql" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
