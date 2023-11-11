@@ -28,7 +28,7 @@ public static class ServiceCollectionExtensions
             .AddFluentSpreadsheets()
             .AddGoogleSheets();
 
-        collection.AddSingleton<ICultureInfoProvider, RuCultureInfoProvider>();
+        collection.AddSingleton<ICultureInfoProvider, EnCultureInfoProvider>();
 
         collection.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<IAssemblyMarker>());
 

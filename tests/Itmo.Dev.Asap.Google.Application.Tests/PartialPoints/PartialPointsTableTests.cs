@@ -31,7 +31,7 @@ public class PartialPointsTableTests
                     }),
             });
 
-        var table = new PartialPointsTable(new RuCultureInfoProvider());
+        var table = new PartialPointsTable(new EnCultureInfoProvider());
 
         // Act
         IComponent component = table.Render(points);

@@ -3,12 +3,12 @@ using System.Globalization;
 
 namespace Itmo.Dev.Asap.Google.Application.Providers;
 
-public class RuCultureInfoProvider : ICultureInfoProvider
+public class EnCultureInfoProvider : ICultureInfoProvider
 {
-    private static readonly CultureInfo RuCultureInfo = new CultureInfo("ru-RU");
+    private static readonly CultureInfo EnCultureInfo = new CultureInfo("en-US");
 
     public CultureInfo GetCultureInfo()
     {
-        return RuCultureInfo;
+        return EnCultureInfo;
     }
 }
