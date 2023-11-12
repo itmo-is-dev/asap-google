@@ -1,10 +1,12 @@
 using FluentSpreadsheets;
+using FluentSpreadsheets.Labels;
 using FluentSpreadsheets.Tables;
 using Itmo.Dev.Asap.Google.Application.Extensions;
 using Itmo.Dev.Asap.Google.Application.Models.Tables.Points;
 using Itmo.Dev.Asap.Google.Common.Tools;
 using System.Drawing;
 using System.Globalization;
+using System.Text;
 using static FluentSpreadsheets.ComponentFactory;
 
 namespace Itmo.Dev.Asap.Google.Application.Points;
@@ -54,8 +56,7 @@ public class PointsTable : RowTable<SubjectCoursePoints>
             PointsStudent student = model.Students[i];
             StudentAssignmentPoints studentAssignmentPoints = model.StudentPoints[student.Id];
 
-            double totalPoints = studentAssignmentPoints.Points.Sum(p => p.Value.Points);
-            double roundedPoints = Math.Round(totalPoints, 2);
+            var pointLabels = new List<IComponentIndexLabel>(model.Assignments.Count);
 
             IRowComponent row = Row(
                     Label(student.UniversityId),
@@ -64,8 +65,19 @@ public class PointsTable : RowTable<SubjectCoursePoints>
                     Label(student.GithubUserName ?? string.Empty),
                     ForEach(
                         model.Assignments,
-                        a => BuildAssignmentPointsCell(a.Value, studentAssignmentPoints.Points, currentCulture)),
-                    Label(roundedPoints, currentCulture).WithTrailingMediumBorder())
+                        a =>
+                        {
+                            IComponent x = BuildAssignmentPointsCell(
+                                a.Value,
+                                studentAssignmentPoints.Points,
+                                currentCulture,
+                                out IComponentIndexLabel label);
+
+                            pointLabels.Add(label);
+
+                            return x;
+                        }),
+                    Label(_ => CreateTotalPointsFormula(pointLabels)).WithTrailingMediumBorder())
                 .WithDefaultStyle(i, model.Students.Count)
                 .WithGroupSeparators(i, model);
 
@@ -76,18 +88,34 @@ public class PointsTable : RowTable<SubjectCoursePoints>
     private static IComponent BuildAssignmentPointsCell(
         Assignment assignment,
         IReadOnlyDictionary<Guid, AssignmentPoints> points,
-        IFormatProvider formatProvider)
+        IFormatProvider formatProvider,
+        out IComponentIndexLabel label)
     {
         if (points.TryGetValue(assignment.Id, out AssignmentPoints? assignmentPoints) is false)
-            return EmptyAssignmentPointsCell;
+            return EmptyAssignmentPointsCell.WithIndexLabel(out label);
 
-        IComponent stack = HStack(
-            Label(assignmentPoints.Points, formatProvider).WithLeadingMediumBorder(),
-            Label(assignmentPoints.Date, formatProvider).WithTrailingMediumBorder());
+        IComponent pointsComponent = Label(assignmentPoints.Points, formatProvider)
+            .WithLeadingMediumBorder()
+            .WithIndexLabel(out label);
+
+        IComponent dateComponent = Label(assignmentPoints.Date, formatProvider)
+            .WithTrailingMediumBorder();
+
+        IComponent stack = HStack(pointsComponent, dateComponent);
 
         if (assignmentPoints.IsBanned)
             stack = stack.FilledWith(Color.Red);
 
         return stack;
+    }
+
+    private static string CreateTotalPointsFormula(IEnumerable<IComponentIndexLabel> pointLabels)
+    {
+        var builder = new StringBuilder("=");
+
+        IEnumerable<string> labelStrings = pointLabels.Select(a => a.Index.ToString());
+        builder.AppendJoin("+", labelStrings);
+
+        return builder.ToString();
     }
 }
