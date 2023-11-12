@@ -94,19 +94,14 @@ public class PointsTable : RowTable<SubjectCoursePoints>
         if (points.TryGetValue(assignment.Id, out AssignmentPoints? assignmentPoints) is false)
             return EmptyAssignmentPointsCell.WithIndexLabel(out label);
 
-        IComponent pointsComponent = Label(assignmentPoints.Points, formatProvider)
-            .WithLeadingMediumBorder()
-            .WithIndexLabel(out label);
-
-        IComponent dateComponent = Label(assignmentPoints.Date, formatProvider)
-            .WithTrailingMediumBorder();
-
-        IComponent stack = HStack(pointsComponent, dateComponent);
+        IComponent stack = HStack(
+            Label(assignmentPoints.Points, formatProvider).WithLeadingMediumBorder(),
+            Label(assignmentPoints.Date, formatProvider).WithTrailingMediumBorder());
 
         if (assignmentPoints.IsBanned)
             stack = stack.FilledWith(Color.Red);
 
-        return stack;
+        return stack.WithIndexLabel(out label);
     }
 
     private static string CreateTotalPointsFormula(IEnumerable<IComponentIndexLabel> pointLabels)
