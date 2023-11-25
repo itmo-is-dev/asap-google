@@ -16,7 +16,7 @@ WORKDIR "/source/src/Itmo.Dev.Asap.Google"
 RUN dotnet publish "Itmo.Dev.Asap.Google.csproj" -c Release -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0.5 AS final
+EXPOSE 8032
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS=http://0.0.0.0:8030
 ENTRYPOINT ["dotnet", "Itmo.Dev.Asap.Google.dll"]
