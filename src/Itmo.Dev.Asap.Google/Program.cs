@@ -9,6 +9,7 @@ using Itmo.Dev.Asap.Google.Presentation.Kafka.Extensions;
 using Itmo.Dev.Asap.Google.Spreadsheets.Extensions;
 using Itmo.Dev.Platform.Logging.Extensions;
 using Itmo.Dev.Platform.YandexCloud.Extensions;
+using Prometheus;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
@@ -43,6 +44,8 @@ app.UseSwaggerUI();
 
 app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseRouting();
+app.UseHttpMetrics();
+app.UseGrpcMetrics();
 app.UsePlatformSentryTracing(builder.Configuration);
 
 app.UseRpcPresentation();

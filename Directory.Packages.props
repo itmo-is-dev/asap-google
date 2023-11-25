@@ -19,6 +19,7 @@
     <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.53" />
     <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.53" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+    <PackageVersion Include="prometheus-net.AspNetCore.Grpc" Version="8.1.0" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
     <PackageVersion Include="System.Runtime.Caching" Version="7.0.0" />
   </ItemGroup>
