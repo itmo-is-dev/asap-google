@@ -5,6 +5,7 @@
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection"/>
         <PackageReference Include="Grpc.Tools"/>
         <PackageReference Include="MediatR"/>
+        <PackageReference Include="prometheus-net.AspNetCore.Grpc" />
     </ItemGroup>
 
     <ItemGroup>

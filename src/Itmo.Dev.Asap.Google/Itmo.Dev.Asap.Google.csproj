@@ -10,6 +10,7 @@
         <PackageReference Include="Itmo.Dev.Platform.YandexCloud" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+        <PackageReference Include="prometheus-net.AspNetCore.Grpc" />
         <PackageReference Include="Serilog.Sinks.Console" />
         <PackageReference Include="Serilog.Sinks.File" />
         <PackageReference Include="Swashbuckle.AspNetCore" />

@@ -51,7 +51,8 @@ internal class SubjectCoursePointsPartiallyUpdatedHandler : INotificationHandler
             .WithAssignmentIds(notification.Points.Select(x => x.AssignmentId)));
 
         var studentsQuery = SubjectCourseStudentsQuery.Build(builder => builder
-            .WithStudentIds(notification.Points.Select(x => x.StudentId)));
+            .WithStudentIds(notification.Points.Select(x => x.StudentId))
+            .WithSubjectCourseId(subjectCourse.Id));
 
         Dictionary<Guid, int> assignments = await _context.SubjectCourseAssignments
             .QueryAsync(query: assignmentQuery, cancellationToken: cancellationToken)

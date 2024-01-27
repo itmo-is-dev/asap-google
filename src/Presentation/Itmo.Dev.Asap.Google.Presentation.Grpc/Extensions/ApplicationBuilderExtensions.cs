@@ -1,5 +1,6 @@
 using Itmo.Dev.Asap.Google.Presentation.Grpc.Services;
 using Microsoft.AspNetCore.Builder;
+using Prometheus;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Grpc.Extensions;
 
@@ -11,47 +12,9 @@ public static class ApplicationBuilderExtensions
         {
             x.MapGrpcService<GoogleSubjectCourseController>();
             x.MapGrpcReflectionService();
+            x.MapMetrics();
         });
 
         return builder;
     }
 }
-
-// using Itmo.Dev.Asap.Google.Application.Extensions;
-// using Itmo.Dev.Asap.Google.Application.Handlers.Extensions;
-// using Itmo.Dev.Asap.Google.DataAccess.Extensions;
-// using Itmo.Dev.Asap.Google.Presentation.Services.Extensions;
-// using Itmo.Dev.Asap.Google.Spreadsheets.Extensions;
-// using Microsoft.Extensions.Configuration;
-// using Microsoft.Extensions.DependencyInjection;
-// using Npgsql;
-//
-// namespace Itmo.Dev.Asap.Google;
-//
-// public static class ServiceCollectionExtensions
-// {
-//     public static IServiceCollection AddAsapGoogle(
-//         this IServiceCollection collection,
-//         IConfiguration configuration,
-//         string databaseConnectionString)
-//     {
-//         bool enabled = configuration.GetValue<bool>("Google:Enabled");
-//
-//         if (enabled)
-//         {
-//             collection
-//                 .AddGoogleApplication()
-//                 .AddGoogleApplicationHandlers()
-//                 .AddGoogleInfrastructureIntegration(configuration)
-//                 .AddGooglePresentationServices();
-//
-//             collection.AddGoogleDataAccess(_ => new NpgsqlConnection(databaseConnectionString));
-//         }
-//         else
-//         {
-//             collection.AddDummyGooglePresentationServices();
-//         }
-//
-//         return collection;
-//     }
-// }
