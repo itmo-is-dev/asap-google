@@ -4,7 +4,6 @@ using Itmo.Dev.Asap.Google.Application.Models.Tables.Points;
 using Itmo.Dev.Asap.Google.Common;
 using Itmo.Dev.Asap.Kafka;
 using Itmo.Dev.Platform.Kafka.Consumer;
-using Itmo.Dev.Platform.Kafka.Consumer.Models;
 using Itmo.Dev.Platform.Kafka.Extensions;
 using MediatR;
 using static Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.Notifications.SubjectCoursePointsUpdated;
@@ -12,7 +11,7 @@ using static Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.Notificat
 namespace Itmo.Dev.Asap.Google.Presentation.Kafka.Handlers;
 
 public class SubjectCoursePointsUpdatedHandler
-    : IKafkaMessageHandler<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>
+    : IKafkaConsumerHandler<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>
 {
     private readonly IMediator _mediator;
     private readonly IGithubUserService _githubUserService;
@@ -26,10 +25,10 @@ public class SubjectCoursePointsUpdatedHandler
     }
 
     public async ValueTask HandleAsync(
-        IEnumerable<ConsumerKafkaMessage<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>> messages,
+        IEnumerable<IKafkaConsumerMessage<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>> messages,
         CancellationToken cancellationToken)
     {
-        ConsumerKafkaMessage<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>[] latest = messages
+        IKafkaConsumerMessage<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>[] latest = messages
             .GetLatestByKey()
             .ToArray();
 

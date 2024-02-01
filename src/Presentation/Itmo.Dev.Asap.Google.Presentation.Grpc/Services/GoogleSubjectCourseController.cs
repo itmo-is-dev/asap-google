@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Grpc.Services;
 
-public class GoogleSubjectCourseController : Google.GoogleSubjectCourseService.GoogleSubjectCourseServiceBase
+public class GoogleSubjectCourseController : GoogleSubjectCourseService.GoogleSubjectCourseServiceBase
 {
     private readonly IMediator _mediator;
 

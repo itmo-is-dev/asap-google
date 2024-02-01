@@ -1,43 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-      <UserSecretsId>4d8a2876-0af4-4b9a-b694-e05b6b94863f</UserSecretsId>
-      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>4d8a2876-0af4-4b9a-b694-e05b6b94863f</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Itmo.Dev.Platform.Logging" />
-        <PackageReference Include="Itmo.Dev.Platform.YandexCloud" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
-        <PackageReference Include="prometheus-net.AspNetCore.Grpc" />
-        <PackageReference Include="Serilog.Sinks.Console" />
-        <PackageReference Include="Serilog.Sinks.File" />
-        <PackageReference Include="Swashbuckle.AspNetCore" />
+        <PackageReference Include="Itmo.Dev.Platform.Logging"/>
+        <PackageReference Include="Itmo.Dev.Platform.YandexCloud"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets"/>
+        <PackageReference Include="prometheus-net.AspNetCore.Grpc"/>
+        <PackageReference Include="Serilog.Sinks.Console"/>
+        <PackageReference Include="Serilog.Sinks.File"/>
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application\Itmo.Dev.Asap.Google.Application.csproj" />
-        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Caching\Itmo.Dev.Asap.Google.Caching.csproj" />
-        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.DataAccess\Itmo.Dev.Asap.Google.DataAccess.csproj" />
-        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Integrations.Github\Itmo.Dev.Asap.Google.Integrations.Github.csproj" />
-        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Spreadsheets\Itmo.Dev.Asap.Google.Spreadsheets.csproj" />
-        <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Grpc\Itmo.Dev.Asap.Google.Presentation.Grpc.csproj" />
-        <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Kafka\Itmo.Dev.Asap.Google.Presentation.Kafka.csproj" />
+        <ProjectReference Include="..\Application\Itmo.Dev.Asap.Google.Application\Itmo.Dev.Asap.Google.Application.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Caching\Itmo.Dev.Asap.Google.Caching.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.DataAccess\Itmo.Dev.Asap.Google.DataAccess.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Integrations.Github\Itmo.Dev.Asap.Google.Integrations.Github.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Itmo.Dev.Asap.Google.Spreadsheets\Itmo.Dev.Asap.Google.Spreadsheets.csproj"/>
+        <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Grpc\Itmo.Dev.Asap.Google.Presentation.Grpc.csproj"/>
+        <ProjectReference Include="..\Presentation\Itmo.Dev.Asap.Google.Presentation.Kafka\Itmo.Dev.Asap.Google.Presentation.Kafka.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Update="appsettings.Local.json">
+        <Content Update="appsettings.*.json">
             <DependentUpon>appsettings.json</DependentUpon>
-        </Content>
-        <Content Update="appsettings.Production.json">
-            <DependentUpon>appsettings.json</DependentUpon>
-        </Content>
-        <Content Update="appsettings.Staging.json">
-            <DependentUpon>appsettings.json</DependentUpon>
-        </Content>
-        <Content Include="..\..\.dockerignore">
-          <Link>.dockerignore</Link>
         </Content>
     </ItemGroup>
 

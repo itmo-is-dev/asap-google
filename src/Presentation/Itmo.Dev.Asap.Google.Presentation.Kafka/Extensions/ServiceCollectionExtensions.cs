@@ -19,38 +19,42 @@ public static class ServiceCollectionExtensions
 
         collection.AddKafka(builder => builder
             .ConfigureOptions(b => b.BindConfiguration("Presentation:Kafka"))
-            .AddConsumer<QueueUpdatedKey, QueueUpdatedValue>(selector => selector
-                .HandleWith<QueueUpdatedHandler>()
-                .DeserializeKeyWithProto()
-                .DeserializeValueWithProto()
-                .UseNamedOptionsConfiguration(
-                    "QueueUpdated",
+            .AddConsumer(selector => selector
+                .WithKey<QueueUpdatedKey>()
+                .WithValue<QueueUpdatedValue>()
+                .WithConfiguration(
                     configuration.GetSection($"{consumerKey}:QueueUpdated"),
-                    c => c.WithGroup(group)))
-            .AddConsumer<SubjectCourseCreatedKey, SubjectCourseCreatedValue>(selector => selector
-                .HandleWith<SubjectCourseCreatedHandler>()
+                    c => c.WithGroup(group))
                 .DeserializeKeyWithProto()
                 .DeserializeValueWithProto()
-                .UseNamedOptionsConfiguration(
-                    "SubjectCourseCreated",
+                .HandleWith<QueueUpdatedHandler>())
+            .AddConsumer(selector => selector
+                .WithKey<SubjectCourseCreatedKey>()
+                .WithValue<SubjectCourseCreatedValue>()
+                .WithConfiguration(
                     configuration.GetSection($"{consumerKey}:SubjectCourseCreated"),
-                    c => c.WithGroup(group)))
-            .AddConsumer<SubjectCoursePointsUpdatedKey, SubjectCoursePointsUpdatedValue>(selector => selector
-                .HandleWith<SubjectCoursePointsUpdatedHandler>()
+                    c => c.WithGroup(group))
                 .DeserializeKeyWithProto()
                 .DeserializeValueWithProto()
-                .UseNamedOptionsConfiguration(
-                    "SubjectCoursePointsUpdated",
+                .HandleWith<SubjectCourseCreatedHandler>())
+            .AddConsumer(selector => selector
+                .WithKey<SubjectCoursePointsUpdatedKey>()
+                .WithValue<SubjectCoursePointsUpdatedValue>()
+                .WithConfiguration(
                     configuration.GetSection($"{consumerKey}:SubjectCoursePointsUpdated"),
-                    c => c.WithGroup(group)))
-            .AddConsumer<StudentPointsUpdatedKey, StudentPointsUpdatedValue>(selector => selector
-                .HandleWith<StudentPointsUpdatedHandler>()
+                    c => c.WithGroup(group))
                 .DeserializeKeyWithProto()
                 .DeserializeValueWithProto()
-                .UseNamedOptionsConfiguration(
-                    "StudentPointsUpdated",
+                .HandleWith<SubjectCoursePointsUpdatedHandler>())
+            .AddConsumer(selector => selector
+                .WithKey<StudentPointsUpdatedKey>()
+                .WithValue<StudentPointsUpdatedValue>()
+                .WithConfiguration(
                     configuration.GetSection($"{consumerKey}:StudentPointsUpdated"),
-                    c => c.WithGroup(group))));
+                    c => c.WithGroup(group))
+                .DeserializeKeyWithProto()
+                .DeserializeValueWithProto()
+                .HandleWith<StudentPointsUpdatedHandler>()));
 
         return collection;
     }

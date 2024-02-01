@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:7.0.403 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 COPY ./src ./src
 COPY ./*.sln .
@@ -15,7 +15,7 @@ FROM build AS publish
 WORKDIR "/source/src/Itmo.Dev.Asap.Google"
 RUN dotnet publish "Itmo.Dev.Asap.Google.csproj" -c Release -o /app/publish /p:UseAppHost=false --no-restore
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0.5 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 EXPOSE 8032
 WORKDIR /app
 COPY --from=publish /app/publish .

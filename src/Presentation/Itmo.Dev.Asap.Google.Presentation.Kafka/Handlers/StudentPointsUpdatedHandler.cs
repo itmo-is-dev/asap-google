@@ -2,14 +2,13 @@ using Itmo.Dev.Asap.Google.Application.Contracts.SubjectCourses.Notifications;
 using Itmo.Dev.Asap.Google.Common;
 using Itmo.Dev.Asap.Kafka;
 using Itmo.Dev.Platform.Kafka.Consumer;
-using Itmo.Dev.Platform.Kafka.Consumer.Models;
 using Itmo.Dev.Platform.Kafka.Extensions;
 using MediatR;
 
 namespace Itmo.Dev.Asap.Google.Presentation.Kafka.Handlers;
 
 public class StudentPointsUpdatedHandler
-    : IKafkaMessageHandler<StudentPointsUpdatedKey, StudentPointsUpdatedValue>
+    : IKafkaConsumerHandler<StudentPointsUpdatedKey, StudentPointsUpdatedValue>
 {
     private readonly IMediator _mediator;
 
@@ -19,7 +18,7 @@ public class StudentPointsUpdatedHandler
     }
 
     public async ValueTask HandleAsync(
-        IEnumerable<ConsumerKafkaMessage<StudentPointsUpdatedKey, StudentPointsUpdatedValue>> messages,
+        IEnumerable<IKafkaConsumerMessage<StudentPointsUpdatedKey, StudentPointsUpdatedValue>> messages,
         CancellationToken cancellationToken)
     {
         IEnumerable<SubjectCoursePointsPartiallyUpdated.Notification> notifications = messages
@@ -33,7 +32,7 @@ public class StudentPointsUpdatedHandler
 
     private static SubjectCoursePointsPartiallyUpdated.Notification Map(
         string subjectCourseId,
-        IEnumerable<ConsumerKafkaMessage<StudentPointsUpdatedKey, StudentPointsUpdatedValue>> messages)
+        IEnumerable<IKafkaConsumerMessage<StudentPointsUpdatedKey, StudentPointsUpdatedValue>> messages)
     {
         IEnumerable<StudentPointsUpdatedValue> latestValues = messages
             .GetLatestBy(message => (message.Value.StudentId, message.Value.AssignmentId))
