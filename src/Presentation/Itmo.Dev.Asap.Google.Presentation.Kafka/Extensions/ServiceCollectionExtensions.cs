@@ -17,8 +17,8 @@ public static class ServiceCollectionExtensions
 
         string group = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
 
-        collection.AddKafka(builder => builder
-            .ConfigureOptions(b => b.BindConfiguration("Presentation:Kafka"))
+        collection.AddPlatformKafka(builder => builder
+            .ConfigureOptions(configuration.GetSection("Presentation:Kafka"))
             .AddConsumer(selector => selector
                 .WithKey<QueueUpdatedKey>()
                 .WithValue<QueueUpdatedValue>()

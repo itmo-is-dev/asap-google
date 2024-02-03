@@ -14,11 +14,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="Itmo.Dev.Editorconfig" Version="1.0.2" />
-    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="2.0.86" />
-    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.1.86" />
-    <PackageVersion Include="Itmo.Dev.Platform.Testing" Version="1.0.86" />
-    <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.86" />
-    <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.86" />
+    <PackageVersion Include="Itmo.Dev.Platform.Kafka" Version="2.0.89" />
+    <PackageVersion Include="Itmo.Dev.Platform.Postgres" Version="1.1.89" />
+    <PackageVersion Include="Itmo.Dev.Platform.Testing" Version="1.0.89" />
+    <PackageVersion Include="Itmo.Dev.Platform.YandexCloud" Version="1.0.89" />
+    <PackageVersion Include="Itmo.Dev.Platform.Logging" Version="1.0.89" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageVersion Include="prometheus-net.AspNetCore.Grpc" Version="8.2.1" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
